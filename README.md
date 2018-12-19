@@ -1,4 +1,5 @@
-Wiki : https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs
+
+Visualisateur du pattern [Producteur-Consommateur](https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs)
 
 Équipe : 
 - [Raphaël Margueron](https://github.com/theraphael0000)
