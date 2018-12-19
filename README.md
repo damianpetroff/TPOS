@@ -1,4 +1,3 @@
-
 # WEB-viewer du pattern [Producteur-Consommateur](https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs)
 
 Équipe : 
@@ -13,17 +12,16 @@
 - Animation du patterne
 - Gestion de synchronisation 
 
-#### Fonctionnalités additionnelles voulues
 Intéractions:
 - Vitesse du producteur et du consommateur
 - Multiples producteurs et consommateurs
 - Multiples buffers
 
+
 #### Nice to have
 - Jolie GUI
-- Site "musée"
+- Site "musée" qui se veut éducatif
 - Tooltips
-- Site qui se veut éducatif
 
-### Outils
+## Outils
 - [p5.js](https://p5js.org/)
