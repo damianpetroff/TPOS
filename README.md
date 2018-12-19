@@ -1,16 +1,17 @@
 
-Visualisateur du pattern [Producteur-Consommateur](https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs)
+# WEB-viewer du pattern [Producteur-Consommateur](https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs)
 
 Équipe : 
 - [Raphaël Margueron](https://github.com/theraphael0000)
 - [Quentin Michel](https://github.com/miaouw17)
 - [Damian Petroff](https://github.com/damianpetroff)
 
-# Cahier des charges
+## Cahier des charges
 #### Base
 - Page Web (HTML, CSS, JS) illustrant le principe du patterne producteur-consumateur.
 - Afficher un buffer linéaire ou circulaire.
 - Animation du patterne
+- Gestion de synchronisation 
 
 #### Fonctionnalités additionnelles voulues
 Intéractions:
@@ -19,7 +20,10 @@ Intéractions:
 - Multiples buffers
 
 #### Nice to have
-- 
+- Jolie GUI
+- Site "musée"
+- Tooltips
+- Site qui se veut éducatif
 
 ### Outils
 - [p5.js](https://p5js.org/)
