@@ -2,9 +2,11 @@ class Entity {
     constructor(x, y) {
         this.pos = createVector(x, y);
         this.size = 20;
-        this.target = createVector(0, 0);
-        this.deltaMinTarget = 5;
+        this.target = undefined;
+        this.distMinToTarget = 1;
         this.speed = 2;
+
+        this.holdData = false;
     }
 
     update() {
@@ -12,11 +14,17 @@ class Entity {
     }
 
     updatePosition() {
-        if (this.pos.dist(this.target) >= this.deltaMinTarget) {
-            let dist = p5.Vector.sub(this.pos, this.target);
-            dist.normalize();
-            dist.mult(this.speed);
-            this.pos.add(dist);
+        if(this.target != undefined)
+        {
+            if (this.pos.dist(this.target) >= this.distMinToTarget) {
+                let dist = p5.Vector.sub(this.target, this.pos);
+                dist.normalize();
+                dist.mult(this.speed);
+                this.pos.add(dist);
+            }
+            else {
+                this.target = undefined;
+            }
         }
         //Else stay still
     }
@@ -26,7 +34,13 @@ class Entity {
     }
 
     draw() {
+        push();
         ellipseMode(CENTER);
+        if(this.holdData)
+            fill(127);
+        else
+            fill(255);
         ellipse(this.pos.x, this.pos.y, this.size, this.size);
+        pop();
     }
 }
