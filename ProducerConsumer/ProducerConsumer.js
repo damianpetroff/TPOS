@@ -1,28 +1,27 @@
 class ProducerConsumer {
 
-    constructor(nbBuffers, nbProducer, nbConsumer) {
+    constructor(nbBuffers, nbProducers, nbConsumers) {
         this.buffers = [];
         this.entities = [];
 
         this.nbBuffers = nbBuffers;
-        this.nbConsumer = nbConsumer;
-        this.nbProducer = nbProducer;
+        this.nbConsumers = nbConsumers;
+        this.nbProducers = nbProducers;
+
+        this.marginX = 300;
+        this.marginY = 10;
+
+        let remainingWidth = width - ((this.nbBuffers + 1) * this.marginX);
+        let remainingHeight = height - 2 * this.marginY;
+
+        this.bufferWidth = remainingWidth / this.nbBuffers;
+        this.bufferHeight = remainingHeight;
 
         for (let i = 0; i < this.nbBuffers; i++) {
-            this.buffers.push(new CircularBuffer(20, 10, 50, 100, 4, 'vertical'));
+            let x = (i+1) * this.marginX + this.bufferWidth * i - this.bufferWidth / 2;
+            let y = this.marginY;
+            this.buffers.push(new Buffer(x, y, this.bufferWidth, this.bufferHeight , 4, 'vertical', this.nbProducers, this.nbConsumers));
         }
-
-
-        for (let i = 0; i < this.nbProducer; i++) {
-            this.entities.push(new Producer(random(0, width), random(0, height)));
-        }
-
-        for (let i = 0; i < this.nbConsumer; i++) {
-            this.entities.push(new Consumer(random(0, width), random(0, height)));
-        }
-
-        this.entities[0].goTo(100, 100);
-        this.entities[0].holdData = true;
     }
 
     update() {
@@ -30,22 +29,12 @@ class ProducerConsumer {
             let buffer = this.buffers[i]
             buffer.update();
         }
-
-        for (let i = 0; i < this.entities.length; i++) {
-            let entity = this.entities[i]
-            entity.update();
-        }
     }
 
     draw() {
         for (let i = 0; i < this.buffers.length; i++) {
             let buffer = this.buffers[i]
             buffer.draw();
-        }
-
-        for (let i = 0; i < this.entities.length; i++) {
-            let entity = this.entities[i]
-            entity.draw();
         }
     }
 

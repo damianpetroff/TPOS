@@ -3,30 +3,37 @@ class Entity {
         this.pos = createVector(x, y);
         this.size = 20;
         this.target = undefined;
-        this.distMinToTarget = 1;
-        this.speed = 2;
+        this.speed = 3;
 
         this.holdData = false;
     }
 
     update() {
-        this.updatePosition();
+        return this.updatePosition();
     }
 
     updatePosition() {
         if(this.target != undefined)
         {
-            if (this.pos.dist(this.target) >= this.distMinToTarget) {
+            //check if the position is near the target
+            if (this.pos.dist(this.target) >= this.speed) {
                 let dist = p5.Vector.sub(this.target, this.pos);
                 dist.normalize();
                 dist.mult(this.speed);
                 this.pos.add(dist);
             }
             else {
+                this.pos = this.target; // set it to the target
                 this.target = undefined;
+                return true; //target reached
             }
         }
+        else
+        {
+            this.target = createVector(random(width),random(height))
+        }
         //Else stay still
+        return false;
     }
 
     goTo(x, y) {
