@@ -30,10 +30,11 @@ class Buffer {
     }
 
     // Update data ---
-    add() {
+    add(color) {
         if (this.used >= this.bufferCells.length)
             return false;
-        this.bufferCells[this.firstFree].data = color(random(0, 255));
+        //this.bufferCells[this.firstFree].data = color(random(0,255), 255, 255);
+        this.bufferCells[this.firstFree].data = color;
         this.firstFree = (this.firstFree + 1) % this.bufferCells.length; //
         this.used++;
         return true;
@@ -57,7 +58,10 @@ class Buffer {
             {
                 if(producer.holdData)
                 {
-                    this.add();
+                    push();
+                    colorMode(HSB, 255);
+                    this.add(color(random(0,255), 255, 255));
+                    pop();
                     // target 1
                     producer.target = createVector(random(width), random(height));
                 }
@@ -112,9 +116,9 @@ class Buffer {
         for (let i = 0; i < this.bufferCells.length; i++) {
             stroke(255);
             if (this.bufferCells[i].data)
-                this.bufferCells[i].setColor(127);
+                fill(this.bufferCells[i].data);
             else
-                this.bufferCells[i].removeColor();
+                noFill();
 
             // draw bufferCell
             //rect(0, i * this.dim.y, this.dim.x, this.dim.y);
