@@ -25,13 +25,11 @@ class BufferCell
     this.data = false;
   }
 
-  setColor(value)
+  center()
   {
-    fill(value);
-  }
-
-  removeColor()
-  {
-    noFill();
+    let dim = this.dim;
+    dim.x /= 2;
+    dim.y /= 2;
+    return dim;
   }
 }
