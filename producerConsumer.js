@@ -1,12 +1,17 @@
 let producerConsumer;
 
 function setup() {
-    createCanvas(1700, 800);
-    producerConsumer = new ProducerConsumer(5, 1, 1);
+    createCanvas(WIDTH, HEIGHT);
+    reset(DEFAULTVALUEBUFFERQTE);
+}
+
+function reset(nbBuffers)
+{
+    producerConsumer = new ProducerConsumer(nbBuffers, 1, 1);
 }
 
 function draw() {
-    background(10);
+    background(42);
     producerConsumer.update();
     producerConsumer.draw();
 }
