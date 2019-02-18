@@ -2,7 +2,13 @@ class Buffer {
     constructor(x, y, width, height, size, shape, nbProducers, nbConsumers) {
         this.pos = createVector(x, y);
         this.dim = createVector(width, height / size);
-        this.data = Array(size);
+        //this.data = Array(size);
+        this.bufferCells = Array(size);
+
+        for(let i=0; i<this.bufferCells.length; i++)
+        {
+          this.bufferCells[i] = new BufferCell(0, i * this.dim.y, this.dim.x, this.dim.y, false);
+        }
 
         this.firstFree = 0;
         this.lastFree = 0;
@@ -23,11 +29,12 @@ class Buffer {
         this.entities = this.consumers.slice().concat(this.producers); // merge both array in a new one
     }
 
+    // Update data ---
     add() {
-        if (this.used >= this.data.length)
+        if (this.used >= this.bufferCells.length)
             return false;
-        this.data[this.firstFree] = color(random(0, 255));
-        this.firstFree = (this.firstFree + 1) % this.data.length;
+        this.bufferCells[this.firstFree].data = color(random(0, 255));
+        this.firstFree = (this.firstFree + 1) % this.bufferCells.length; //
         this.used++;
         return true;
     }
@@ -35,11 +42,12 @@ class Buffer {
     remove() {
         if (this.used <= 0)
             return false;
-        this.data[this.lastFree] = false;
-        this.lastFree = (this.lastFree + 1) % this.data.length;
+        this.bufferCells[this.lastFree].data = false;
+        this.lastFree = (this.lastFree + 1) % this.bufferCells.length;
         this.used--;
         return true;
     }
+    // ---
 
     update() {
         for (let i = 0; i < this.producers.length; i++) {
@@ -84,6 +92,8 @@ class Buffer {
 
     }
 
+
+
     draw() {
         this.drawBuffer();
         this.drawEntities();
@@ -99,17 +109,20 @@ class Buffer {
     drawBuffer() {
         push();
         translate(this.pos.x, this.pos.y);
-        for (let i = 0; i < this.data.length; i++) {
+        for (let i = 0; i < this.bufferCells.length; i++) {
             stroke(255);
-            if (this.data[i])
-                fill(127);
+            if (this.bufferCells[i].data)
+                this.bufferCells[i].setColor(127);
             else
-                noFill();
+                this.bufferCells[i].removeColor();
 
-            rect(0, i * this.dim.y, this.dim.x, this.dim.y);
+            // draw bufferCell
+            //rect(0, i * this.dim.y, this.dim.x, this.dim.y);
+            this.bufferCells[i].drawBufferCell();
 
             noStroke();
 
+            // draw Arrow
             let height = 5;
 
             let xArrow = this.dim.x + 5;
