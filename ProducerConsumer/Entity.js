@@ -4,7 +4,6 @@ class Entity {
         this.size = 20;
         this.target = undefined;
         this.speed = 3;
-
         this.holdData = false;
     }
 
