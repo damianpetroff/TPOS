@@ -1,11 +1,11 @@
 class Buffer {
-    constructor(x, y, width, height, size, shape, nbProducers, nbConsumers) {
+    constructor(x, y, width, height, size, shape, producer, consumer) {
         this.pos = createVector(x, y);
         this.dim = createVector(width, height / size);
         //this.data = Array(size);
         this.bufferCells = Array(size);
 
-        for(let i=0; i<this.bufferCells.length; i++)
+        for(let i = 0; i < this.bufferCells.length; i++)
         {
           this.bufferCells[i] = new BufferCell(0, i * this.dim.y, this.dim.x, this.dim.y, false);
         }
@@ -16,17 +16,8 @@ class Buffer {
 
         this.shape = shape;
 
-        this.producers = [];
-        for (let i = 0; i < nbProducers; i++) {
-            this.producers.push(new Entity(random(0, width), random(0, height)));
-        }
-
-        this.consumers = [];
-        for (let i = 0; i < nbConsumers; i++) {
-            this.consumers.push(new Entity(random(0, width), random(0, height)));
-        }
-
-        this.entities = this.consumers.slice().concat(this.producers); // merge both array in a new one
+        this.producer = producer;
+        this.consumers = consumer;
     }
 
     // Update data ---
@@ -48,47 +39,52 @@ class Buffer {
         this.used--;
         return true;
     }
-    // ---
 
     update() {
-        for (let i = 0; i < this.producers.length; i++) {
-            let producer = this.producers[i];
-            let isTargetReached = producer.update();
-            if(isTargetReached)
+        if(this.producer)
+            this.updateProducer();
+        if(this.consumer)
+            this.updateConsumer();
+    }
+
+    updateProducer()
+    {
+        let isTargetReached = this.producer.update();
+        if(isTargetReached)
+        {
+            if(this.producer.holdData)
             {
-                if(producer.holdData)
-                {
-                    push();
-                    colorMode(HSB, 255);
-                    this.add(color(random(0,255), 255, 255));
-                    pop();
-                    // target 1
-                    producer.target = createVector(random(width), random(height));
-                }
-                else
-                {
-                    // target 2
-                    producer.target = createVector(random(width), random(height));
-                }
-                producer.holdData ^= true;
+                push();
+                colorMode(HSB, 255);
+                this.add(color(random(0,255), 255, 255));
+                pop();
+                // target 1
+                this.producer.target = createVector(random(width), random(height));
             }
+            else
+            {
+                // target 2
+                this.producer.target = createVector(random(width), random(height));
+            }
+            this.producer.holdData ^= true;
         }
-        for (let i = 0; i < this.consumers.length; i++) {
-            let consumer = this.consumers[i];
-            let isTargetReached = consumer.update();
-            if(isTargetReached)
+    }
+
+    updateConsumer()
+    {
+        let isTargetReached = this.consumer.update();
+        if(isTargetReached)
+        {
+            if(this.consumer.holdData)
             {
-                if(consumer.holdData)
-                {
-                    this.remove();
-                    consumer.target = createVector(random(width), random(height));
-                }
-                else
-                {
-                    consumer.target = createVector(random(width), random(height));
-                }
-                consumer.holdData ^= true;
+                this.remove();
+                this.consumer.target = createVector(random(width), random(height));
             }
+            else
+            {
+                this.consumer.target = createVector(random(width), random(height));
+            }
+            this.consumer.holdData ^= true;
         }
     }
 
@@ -96,18 +92,16 @@ class Buffer {
 
     }
 
-
-
     draw() {
         this.drawBuffer();
         this.drawEntities();
     }
 
     drawEntities() {
-        for (let i = 0; i < this.entities.length; i++) {
-            let entity = this.entities[i];
-            entity.draw();
-        }
+        if(this.producer)
+            this.producer.draw();
+        if(this.consumer)
+            this.consumer.draw();
     }
 
     drawBuffer() {

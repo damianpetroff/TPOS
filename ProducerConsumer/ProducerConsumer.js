@@ -1,12 +1,10 @@
 class ProducerConsumer {
 
-    constructor(nbBuffers, nbProducers, nbConsumers) {
+    constructor(nbBuffers) {
         this.buffers = [];
         this.entities = [];
 
         this.nbBuffers = nbBuffers;
-        this.nbConsumers = nbConsumers;
-        this.nbProducers = nbProducers;
 
         this.marginX = 300;
         this.marginY = 10;
@@ -17,10 +15,15 @@ class ProducerConsumer {
         this.bufferWidth = remainingWidth / this.nbBuffers;
         this.bufferHeight = remainingHeight;
 
+        let producer = null;
+        let consumer = null;
+
         for (let i = 0; i < this.nbBuffers; i++) {
             let x = (i+1) * this.marginX + this.bufferWidth * i - this.bufferWidth / 2;
             let y = this.marginY;
-            this.buffers.push(new Buffer(x, y, this.bufferWidth, this.bufferHeight , 4, 'vertical', this.nbProducers, this.nbConsumers));
+            producer = new Entity(0, 0);
+            this.buffers.push(new Buffer(x, y, this.bufferWidth, this.bufferHeight , 4, 'vertical', producer, consumer));
+            consumer = new Entity(0, 0);
         }
     }
 
