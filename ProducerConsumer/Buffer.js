@@ -1,13 +1,13 @@
 class Buffer {
-    constructor(x, y, width, height, size, shape, producer, consumer) {
+    constructor(x, y, width, height, size, shape) {
         this.pos = createVector(x, y);
-        this.dim = createVector(width, height / size);
-        //this.data = Array(size);
-        this.bufferCells = Array(size);
+        this.dim = createVector(width, height);
+        this.cellDim = createVector(width, height / size);
 
-        for(let i = 0; i < this.bufferCells.length; i++)
-        {
-          this.bufferCells[i] = new BufferCell(0, i * this.dim.y, this.dim.x, this.dim.y, false);
+        this.data = Array(size);
+
+        for (let i = 0; i < this.data.length; i++) {
+            this.data[i] = false;
         }
 
         this.firstFree = 0;
@@ -15,110 +15,52 @@ class Buffer {
         this.used = 0;
 
         this.shape = shape;
-
-        this.producer = producer;
-        this.consumers = consumer;
     }
 
     // Update data ---
     add(color) {
-        if (this.used >= this.bufferCells.length)
+        if (this.used >= this.data.length)
             return false;
-        //this.bufferCells[this.firstFree].data = color(random(0,255), 255, 255);
-        this.bufferCells[this.firstFree].data = color;
-        this.firstFree = (this.firstFree + 1) % this.bufferCells.length; //
+        this.data[this.firstFree] = color;
+        this.firstFree = (this.firstFree + 1) % this.data.length; //
         this.used++;
         return true;
     }
 
-    remove() {
+    pop() {
         if (this.used <= 0)
             return false;
-        this.bufferCells[this.lastFree].data = false;
-        this.lastFree = (this.lastFree + 1) % this.bufferCells.length;
+        let data = this.data[this.lastFree];
+        this.data[this.lastFree] = false;
+        this.lastFree = (this.lastFree + 1) % this.data.length;
         this.used--;
-        return true;
+        return data;
     }
 
-    update() {
-        if(this.producer)
-            this.updateProducer();
-        if(this.consumer)
-            this.updateConsumer();
+    getAddPosition() {
+        let posX = this.pos.x;
+        let posY = this.pos.y + this.firstFree * this.cellDim.y + this.cellDim.y / 2;
+        return createVector(posX, posY);
     }
 
-    updateProducer()
-    {
-        let isTargetReached = this.producer.update();
-        if(isTargetReached)
-        {
-            if(this.producer.holdData)
-            {
-                push();
-                colorMode(HSB, 255);
-                this.add(color(random(0,255), 255, 255));
-                pop();
-                // target 1
-                this.producer.target = createVector(random(width), random(height));
-            }
-            else
-            {
-                // target 2
-                this.producer.target = createVector(random(width), random(height));
-            }
-            this.producer.holdData ^= true;
-        }
+    getRemovePosition() {
+        let posX = this.pos.x + this.dim.x;
+        let posY = this.pos.y + this.lastFree * this.cellDim.y + this.cellDim.y / 2;
+        return createVector(posX, posY);
     }
 
-    updateConsumer()
-    {
-        let isTargetReached = this.consumer.update();
-        if(isTargetReached)
-        {
-            if(this.consumer.holdData)
-            {
-                this.remove();
-                this.consumer.target = createVector(random(width), random(height));
-            }
-            else
-            {
-                this.consumer.target = createVector(random(width), random(height));
-            }
-            this.consumer.holdData ^= true;
-        }
-    }
-
-    getNextPickPosition() {
-
-    }
+    update() {}
 
     draw() {
-        this.drawBuffer();
-        this.drawEntities();
-    }
-
-    drawEntities() {
-        if(this.producer)
-            this.producer.draw();
-        if(this.consumer)
-            this.consumer.draw();
-    }
-
-    drawBuffer() {
         push();
         translate(this.pos.x, this.pos.y);
-        for (let i = 0; i < this.bufferCells.length; i++) {
-            stroke(255);
-            if (this.bufferCells[i].data)
-                fill(this.bufferCells[i].data);
+        for (let i = 0; i < this.data.length; i++) {
+
+            if(this.data[i])
+                fill(this.data[i]);
             else
                 noFill();
-
-            // draw bufferCell
-            //rect(0, i * this.dim.y, this.dim.x, this.dim.y);
-            this.bufferCells[i].drawBufferCell();
-
-            noStroke();
+            rect(0, this.cellDim.y * i, this.cellDim.x, this.cellDim.y);
 
             // draw Arrow
             let height = 5;
