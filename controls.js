@@ -21,6 +21,21 @@ window.addEventListener('load', function () {
     btnRestart.addEventListener("click", function(){ restart(bufferQte.value); });
     btnStop.addEventListener("click", function(){ logicStopButton(); });
 
+    let tableEntities = document.getElementById("table_entities");
+    let entitesQte = bufferQte.value+1;
+
+    for(int i=1;i<entitesQte;i++)
+    {
+        // Create an empty <tr> element and add it to the 1st position of the table:
+        let row = tableEntities.insertRow(i);
+        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+        let entitieCell = row.insertCell(i);
+        let speedCell = row.insertCell(i+1);
+
+        // Add some text to the new cells:
+        cell1.innerHTML = "tes";
+        cell2.innerHTML = "t";
+    }
 
     updateLabels();
 

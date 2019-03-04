@@ -1,7 +1,6 @@
 <html>
 
 <head>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
     <script src="config.js"></script>
     <script src="producerConsumer.js"></script>
@@ -13,30 +12,12 @@
     <script src="ProducerConsumer/BufferCell.js"></script>
 
     <script src="ProducerConsumer/Entity.js"></script>
-    
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <script src="controls.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<div class="container">
-    <div class="page-header">
-      <h3>
-        <a href="http://he-arc.ch"><img src="external/resources/img/logo_hearc_ingenierie.png" alt="logo_hearc_ingenierie" width="150px" /></a> 3253.1 Conception OS
-      </h3>
-      <p class="lead">Authors : Quentin Michel, Raphaël Margueron & Damian Petroff - INF3dlm-b<br>Last update : 18th February 2019</p>
-      <hr>
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <h3><img src="external/resources/img/flag_fr.png" alt="flag_fr" width="20"/> Introduction</h3> <!--icon source : https://www.flaticon.com/-->
-        <h3><img src="external/resources/img/flag_en.png" alt="flag_en" width="20"/> Introduction</h3> <!--icon source : https://www.flaticon.com/ -->
-        <p>À écrire</p>
-      </div>
-    </div>
-    <br><br>
-  </div>
     <div>
       <button id="btnSync">Synchronize</button>
       <button id="btnRestart">Restart</button>
@@ -44,6 +25,16 @@
     </div>
     <div>
         <label for="bufferQte">Nombre de buffers : </label> <input id="bufferQte" type="range"><span id="bufferQteLabel"></span>
+    </div>
+    <div>
+      <label>Vitesse des entités</labels>
+      <table id="table_entities">
+        <tr>
+          <th>Entité</th>
+          <th>Vitesse</th>
+        </tr>
+        
+      </table>
     </div>
 </body>
 
