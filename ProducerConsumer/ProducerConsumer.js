@@ -1,12 +1,10 @@
 class ProducerConsumer {
 
-    constructor(nbBuffers, nbProducers, nbConsumers) {
+    constructor(nbBuffers) {
         this.buffers = [];
         this.entities = [];
 
         this.nbBuffers = nbBuffers;
-        this.nbConsumers = nbConsumers;
-        this.nbProducers = nbProducers;
 
         this.marginX = 300;
         this.marginY = 10;
@@ -17,10 +15,18 @@ class ProducerConsumer {
         this.bufferWidth = remainingWidth / this.nbBuffers;
         this.bufferHeight = remainingHeight;
 
+        this.buffers.push(new EdgeBuffer(0, HEIGHT / 2));
         for (let i = 0; i < this.nbBuffers; i++) {
-            let x = (i+1) * this.marginX + this.bufferWidth * i - this.bufferWidth / 2;
+            let x = (i + 1) * this.marginX + this.bufferWidth * i;
             let y = this.marginY;
-            this.buffers.push(new Buffer(x, y, this.bufferWidth, this.bufferHeight , 4, 'vertical', this.nbProducers, this.nbConsumers));
+            this.buffers.push(new Buffer(x, y, this.bufferWidth, this.bufferHeight, 4, 'vertical'));
+        }
+        this.buffers.push(new EdgeBuffer(WIDTH, HEIGHT / 2));
+
+        for (let i = 0; i < this.nbBuffers + 1; i++) {
+            let consumerBuffer = this.buffers[i];
+            let producerBuffer = this.buffers[i + 1];
+            this.entities.push(new Entity(consumerBuffer.pos.x, consumerBuffer.pos.y, consumerBuffer, producerBuffer));
         }
     }
 
@@ -29,12 +35,22 @@ class ProducerConsumer {
             let buffer = this.buffers[i]
             buffer.update();
         }
+
+        for (let i = 0; i < this.entities.length; i++) {
+            let entity = this.entities[i]
+            entity.update();
+        }
     }
 
     draw() {
         for (let i = 0; i < this.buffers.length; i++) {
             let buffer = this.buffers[i]
             buffer.draw();
+        }
+
+        for (let i = 0; i < this.entities.length; i++) {
+            let entity = this.entities[i]
+            entity.draw();
         }
     }
 

@@ -1,6 +1,6 @@
 var stop = false;
 
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
 
     let bufferQte = document.getElementById("bufferQte");
     let bufferQteLabel = document.getElementById("bufferQteLabel");
@@ -10,7 +10,9 @@ window.addEventListener('load', function () {
     bufferQte.value = DEFAULTVALUEBUFFERQTE;
 
     bufferQte.addEventListener("input", setBufferQte);
-    bufferQte.addEventListener("input", function(e) { updateLabel(e.srcElement, bufferQteLabel); });
+    bufferQte.addEventListener("input", function(e) {
+        updateLabel(e.srcElement, bufferQteLabel);
+    });
 
 
     let btnSync = document.getElementById("btnSync");
@@ -41,18 +43,15 @@ window.addEventListener('load', function () {
 
 }, false);
 
-function updateLabels()
-{
+function updateLabels() {
     updateLabel(bufferQte, bufferQteLabel);
 }
 
-function setBufferQte(e)
-{
+function setBufferQte(e) {
     reset(int(e.srcElement.value));
 }
 
-function updateLabel(range, label)
-{
+function updateLabel(range, label) {
     label.innerHTML = range.value;
 }
 
