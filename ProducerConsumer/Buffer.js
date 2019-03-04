@@ -73,20 +73,20 @@ class Buffer {
             // draw Arrow
             let height = 5;
 
-            let xArrow = this.dim.x + 5;
-            let yArrow = i * this.dim.y + this.dim.y / 2;
-            let heightArrow = 15;
+
+            let heightArrow = 30;
             let widthArrow = 30;
             let thicknessArrow = 5;
 
+            let xArrow = 0;
+            let yArrow = i * this.dim.y + this.dim.y/2 - heightArrow/2;
             if (i == this.firstFree) {
                 fill(0, 255, 0);
-                drawArrow(xArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
-                xArrow += widthArrow + widthArrow * 0.3;
+                drawRightArrow(xArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
             }
             if (i == this.lastFree) {
                 fill(255, 0, 0);
-                drawArrow(xArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
+                drawRightArrow(xArrow+this.dim.x-widthArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
             }
         }
         pop();

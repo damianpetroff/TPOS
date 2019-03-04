@@ -19,7 +19,21 @@
 
 <body>
     <div>
-        <label for="bufferQte">Nombre de buffers : </label><input id="bufferQte" type="range"><span id="bufferQteLabel"></span>
+      <button id="btnSync">Synchronize</button>
+      <button id="btnRestart">Restart</button>
+      <button id="btnStop">Stop</button>
+    </div>
+    <div>
+        <label for="bufferQte">Nombre de buffers : </label> <input id="bufferQte" type="range"><span id="bufferQteLabel"></span>
+    </div>
+    <div>
+      <label>Vitesse des entités</labels>
+      <table id="table_entities" style="border-style: solid;">
+          <tr>
+            <th>Entité</th>
+            <th>Vitesse</th>
+          </tr>
+      </table>
     </div>
 </body>
 
