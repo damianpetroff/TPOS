@@ -3,7 +3,7 @@ class Entity {
         this.pos = createVector(x, y);
         this.size = 50;
         this.target = productionBuffer.getAddPosition();
-        this.speed = 5;
+        this.speed = 4;
         this.data = false;
 
         this.consumerBuffer = consumerBuffer;

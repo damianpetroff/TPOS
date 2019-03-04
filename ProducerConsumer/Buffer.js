@@ -65,7 +65,7 @@ class Buffer {
             // draw Arrow
             let height = 5;
 
-            
+
             let heightArrow = 30;
             let widthArrow = 30;
             let thicknessArrow = 5;
