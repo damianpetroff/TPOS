@@ -23,11 +23,14 @@ class ProducerConsumer {
         }
         this.buffers.push(new EdgeBuffer(WIDTH, HEIGHT / 2));
 
+
         for (let i = 0; i < this.nbBuffers + 1; i++) {
             let consumerBuffer = this.buffers[i];
             let producerBuffer = this.buffers[i + 1];
             this.entities.push(new Entity(consumerBuffer.pos.x, consumerBuffer.pos.y, consumerBuffer, producerBuffer));
         }
+
+        this.entities[0].debug = true;
     }
 
     update() {

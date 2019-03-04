@@ -37,13 +37,21 @@ class Buffer {
         return data;
     }
 
+    isEmpty() {
+        return this.used <= 0;
+    }
+
+    isFull() {
+        return this.used >= this.data.length;
+    }
+
     getAddPosition() {
         let posX = this.pos.x;
         let posY = this.pos.y + this.firstFree * this.cellDim.y + this.cellDim.y / 2;
         return createVector(posX, posY);
     }
 
-    getRemovePosition() {
+    getPopPosition() {
         let posX = this.pos.x + this.dim.x;
         let posY = this.pos.y + this.lastFree * this.cellDim.y + this.cellDim.y / 2;
         return createVector(posX, posY);
