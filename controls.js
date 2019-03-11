@@ -80,23 +80,32 @@ function changeEntitieSpeed(element) {
 
 function entitesSpeedLogic() {
     //remove old rows
-    let elmtTable = document.getElementById('table_entities');
-    let tableRows = elmtTable.getElementsByTagName('tr');
-    let rowCount = tableRows.length;
+    let table_entities = document.getElementById('table_entities');
+    table_entities.innerHTML = "";
 
-    for (let x = rowCount - 1; x > 0; x--) {
-        elmtTable.removeChild(tableRows[x]);
-    }
+    let trEntities = document.createElement("tr");
+    let trSpeed = document.createElement("tr");
+
+    table_entities.appendChild(trEntities);
+    table_entities.appendChild(trSpeed);
+
+    let thEntities = document.createElement("th");
+    thEntities.innerHTML = "Entité";
+    trEntities.appendChild(thEntities);
+
+    let thSpeed = document.createElement("th");
+    thSpeed.innerHTML = "Vitesse";
+    trSpeed.appendChild(thSpeed);
 
     // add new rows
     let entitiesQte = int(bufferQte.value) + 1;
     for (let i = 0; i < entitiesQte; i++) {
-        let tr = document.createElement("tr");
         let tdEntities = document.createElement("td");
-        tdEntities.style = "text-align:center";
         tdEntities.innerHTML = i;
+        trEntities.appendChild(tdEntities);
+
         let tdSpeed = document.createElement("td");
-        tdSpeed.style = "text-align:center";
+
         let input = document.createElement("input");
         input.id = i;
         input.type = "number";
@@ -108,10 +117,7 @@ function entitesSpeedLogic() {
         });
         tdSpeed.appendChild(input);
 
-        tr.appendChild(tdEntities);
-        tr.appendChild(tdSpeed);
-
-        elmtTable.appendChild(tr);
+        trSpeed.appendChild(tdSpeed);
     }
 }
 

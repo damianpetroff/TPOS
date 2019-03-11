@@ -17,7 +17,6 @@
         <script src="ProducerConsumer/DrawingTools.js"></script>
         <script src="ProducerConsumer/ProducerConsumer.js"></script>
         <script src="ProducerConsumer/Buffer.js"></script>
-        <script src="ProducerConsumer/BufferCell.js"></script>
         <script src="ProducerConsumer/Entity.js"></script>
         <script src="ProducerConsumer/EdgeBuffer.js"></script>
 
@@ -50,14 +49,11 @@
               </p>
             </div>
           </div>
-          <br><br>
+          <h3>Application</h3>
           <div>
               <label for="bufferQte">Nombre de buffers : </label>
-              <input id="bufferQte" type="range"><span id="bufferQteLabel"></span>
-              <!--<div class="range range-primary">
-                    <input id ="rangeSpeed" type="number" name="range" data-slider-min="1" data-slider-max="10" data-slider-value="9"/>
-                    <output id="rangeSpeedOutput">9</output>
-              </div>-->
+              <input id="bufferQte" type="range">
+              <span id="bufferQteLabel"></span>
           </div>
       </div>
 
@@ -69,13 +65,8 @@
           <button id="btnStop">Stop</button>
         </div>
         <div>
-          <label>Vitesse des entités</labels>
-          <table id="table_entities" style="border-style: solid;">
-              <tr>
-                <th>Entité</th>
-                <th>Vitesse</th>
-              </tr>
-          </table>
+          <label>Vitesse des entités</label>
+          <table id="table_entities" class="table w-100"></table>
         </div>
         <div>
             <div id="draw" onclick="toggleFullScreen();"></div>
