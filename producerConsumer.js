@@ -1,14 +1,28 @@
 let producerConsumer;
-
+let p5Canvas;
+let realCanvas;
 
 function setup() {
-    let canvas = createCanvas(WIDTH, HEIGHT);
-    canvas.parent("draw");
+    // width / height are the screen size
+    p5Canvas = createCanvas(WIDTH, HEIGHT);
+    p5Canvas.parent("producerConsumerCanvasContainer");
+    realCanvas = document.getElementById("defaultCanvas0");
+
+    realCanvas.style.width = "100%";
+    document.body.onresize = widthChange;
+    widthChange();
+
     reset(DEFAULT_BUFFER_QTE);
 }
 
 function reset(nbBuffers) {
-    producerConsumer = new ProducerConsumer(nbBuffers, 1, 1);
+    producerConsumer = new ProducerConsumer(nbBuffers);
+}
+
+function widthChange() {
+    let ratio = p5Canvas.width / p5Canvas.height;
+    let container = document.getElementById("producerConsumerCanvasContainer");
+    document.getElementById("defaultCanvas0").style.height = container.offsetWidth / ratio + "px";
 }
 
 function draw() {
@@ -17,12 +31,7 @@ function draw() {
     producerConsumer.draw();
 }
 
-function clickOn() {
-    //Empty
-}
-
 function toggleFullScreen() {
-    console.info("Toggle Fullscreen");
     var isInFullScreen =
         (document.fullscreenElement && document.fullscreenElement !== null) ||
         (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||

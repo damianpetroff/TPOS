@@ -1,5 +1,8 @@
-let WIDTH = screen.width / 2;
-let HEIGHT = screen.height / 2;
+//Global constants
+
+//set in the
+let WIDTH = screen.width;
+let HEIGHT = screen.height;
 
 let MIN_BUFFER_QTE = 1;
 let MAX_BUFFER_QTE = 10;

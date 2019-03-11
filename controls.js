@@ -6,6 +6,9 @@ window.addEventListener('load', function() {
     let bufferQte = document.getElementById("bufferQte");
     let bufferQteLabel = document.getElementById("bufferQteLabel");
 
+    let producerConsumerCanvasContainer = document.getElementById("producerConsumerCanvasContainer");
+    producerConsumerCanvasContainer.addEventListener("click", toggleFullScreen);
+
     bufferQte.min = MIN_BUFFER_QTE;
     bufferQte.max = MAX_BUFFER_QTE;
     bufferQte.value = DEFAULT_BUFFER_QTE;
