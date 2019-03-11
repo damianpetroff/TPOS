@@ -1,4 +1,4 @@
-let stop = false;
+let pause = false;
 
 window.addEventListener('load', function () {
     document.getElementById("lastModified").innerHTML = getFormattedDate(new Date(document.lastModified));
@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
 
     let btnSync = document.getElementById("btnSync");
     let btnRestart = document.getElementById("btnRestart");
-    let btnStop = document.getElementById("btnStop");
+    let btnPause = document.getElementById("btnPause");
 
     btnSync.addEventListener("click", function() {
         synchronize();
@@ -25,7 +25,7 @@ window.addEventListener('load', function () {
     btnRestart.addEventListener("click", function() {
         restart(bufferQte.value);
     });
-    btnStop.addEventListener("click", function() {
+    btnPause.addEventListener("click", function() {
         logicStopButton();
     });
 
@@ -122,14 +122,18 @@ function entitesSpeedLogic() {
 }
 
 function logicStopButton() {
-    if (stop) {
-        btnStop.innerText = "Stop";
+    if (pause) {
+        btnPause.innerText = "Pause";
+        btnPause.classList.add("btn-danger");
+        btnPause.classList.remove("btn-success");
         loop();
     } else {
-        btnStop.innerText = "Resume";
+        btnPause.innerText = "Resume";
+        btnPause.classList.remove("btn-danger");
+        btnPause.classList.add("btn-success");
         noLoop();
     }
-    stop ^= true;
+    pause ^= true;
 }
 
 function restart(bufferQuantity) {
