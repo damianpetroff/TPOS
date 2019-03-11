@@ -1,3 +1,5 @@
+var stop = false;
+
 window.addEventListener('load', function () {
     document.getElementById("lastModified").innerHTML = getFormattedDate(new Date(document.lastModified));
 
@@ -10,6 +12,16 @@ window.addEventListener('load', function () {
 
     bufferQte.addEventListener("input", setBufferQte);
     bufferQte.addEventListener("input", function(e) { updateLabel(e.srcElement, bufferQteLabel); });
+
+
+    let btnSync = document.getElementById("btnSync");
+    let btnRestart = document.getElementById("btnRestart");
+    let btnStop = document.getElementById("btnStop");
+
+    btnSync.addEventListener("click", function(){ synchronize(); });
+    btnRestart.addEventListener("click", function(){ restart(bufferQte.value); });
+    btnStop.addEventListener("click", function(){ logicStopButton(); });
+
 
     updateLabels();
 
@@ -29,6 +41,7 @@ function updateLabel(range, label)
 {
     label.innerHTML = range.value;
 }
+
 
 function getFormattedDate(date) {
   var monthNames = [
@@ -54,4 +67,31 @@ function forceTwoDigits(number)
         return '0'+str(number);
     }
     return number;
+}
+
+function logicStopButton()
+{
+    if(stop)
+    {
+        stop = false;
+        btnStop.innerText = "Stop";
+        loop();
+    }
+    else
+    {
+        stop = true;
+        btnStop.innerText = "Resume";
+        noLoop();
+    }
+}
+
+function restart(bufferQuantity)
+{
+    // quantity is true, but donno why it's bugged
+    reset(bufferQuantity);
+}
+
+function synchronize()
+{
+  // TODO
 }
