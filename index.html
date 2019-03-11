@@ -1,45 +1,86 @@
 <html>
+    <head>
+    	<meta charset="utf-8" />
 
-<head>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-    <script src="config.js"></script>
-    <script src="producerConsumer.js"></script>
-    <script src="ProducerConsumer/DrawingTools.js"></script>
+        <!-- BOOTSTRAP -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script src="ProducerConsumer/ProducerConsumer.js"></script>
+        <!-- P5 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
 
-    <script src="ProducerConsumer/Buffer.js"></script>
-    <script src="ProducerConsumer/BufferCell.js"></script>
+        <!-- CUSTOM JS -->
+        <script src="config.js"></script>
+        <script src="controls.js"></script>
+        <script src="producerConsumer.js"></script>
+        <script src="ProducerConsumer/DrawingTools.js"></script>
+        <script src="ProducerConsumer/ProducerConsumer.js"></script>
+        <script src="ProducerConsumer/Buffer.js"></script>
+        <script src="ProducerConsumer/BufferCell.js"></script>
+        <script src="ProducerConsumer/Entity.js"></script>
+        
+        <!-- CUSTOM CSS -->
+        <link rel="stylesheet" href="./style.css">
 
-    <script src="ProducerConsumer/Entity.js"></script>
-    
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="controls.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
+        <!--
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
+        -->
 
-<body>
-	<div class="container">
-    <div class="page-header">
-      <h3>
-        <a href="http://he-arc.ch"><img src="external/resources/img/logo_hearc_ingenierie.png" alt="logo_hearc_ingenierie" width="150px" /></a> 3253.1 Conception OS
-      </h3>
-      <p class="lead">Authors : Quentin Michel, Raphaël Margueron & Damian Petroff - INF3dlm-b<br>Last update : 18th February 2019</p>
-      <hr>
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <h3><img src="external/resources/img/flag_fr.png" alt="flag_fr" width="20"/> Introduction</h3> <!--icon source : https://www.flaticon.com/-->
-        <h3><img src="external/resources/img/flag_en.png" alt="flag_en" width="20"/> Introduction</h3> <!--icon source : https://www.flaticon.com/ -->
-        <p>À écrire</p>
-      </div>
-    </div>
-    <br><br>
-  </div>
-    <div>
-        <label for="bufferQte">Nombre de buffers : </label><input id="bufferQte" type="range"><span id="bufferQteLabel"></span>
-    </div>
-</body>
-
+    </head>
+    <body>
+    	<div class="container">
+    	    <div class="page-header">
+                <h3>
+                    <a href="http://he-arc.ch"><img src="external/resources/img/logo_hearc_ingenierie_rouge_transp.png" alt="logo_hearc_ingenierie" width="150px" /></a> 3253.1 Conception OS
+                </h3>
+                <p class="lead">
+                    Authors : Quentin Michel, Raphaël Margueron & Damian Petroff - 
+                    <span class="badge badge-danger">INF3dlm-b</span>
+                    <br>Last update : 
+                    <span id="lastModified"></span>
+                </p>
+                <hr>
+    	    </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <h3><img src="external/resources/img/flag_fr.png" alt="flag_fr" width="20"/> Introduction</h3> <!--icon source : https://www.flaticon.com/ -->
+                <p>
+                    Ce application web vise à fournir une représentation graphique du patterne <a href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs">Producteur-Consommateur</a>.
+                </p>
+                <h3><img src="external/resources/img/flag_en.png" alt="flag_en" width="20"/> Introduction</h3> <!--icon source : https://www.flaticon.com/ -->
+                <p>
+                    This web application aims to provide a graphical representation of the <a href="https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">Producer–consumer</a>.
+                </p>
+              </div>
+            </div>
+            <br><br>
+            <div>
+                <label for="bufferQte">Nombre de buffers : </label>
+                <input id="bufferQte" type="range"><span id="bufferQteLabel"></span>
+                <!--<div class="range range-primary">
+                      <input id ="rangeSpeed" type="number" name="range" data-slider-min="1" data-slider-max="10" data-slider-value="9"/>
+                      <output id="rangeSpeedOutput">9</output>
+                </div>-->
+            </div>
+        </div>
+        <div>
+            <div id="draw" onclick="toggleFullScreen();"></div>
+        </div>
+        <div class="container">
+            <hr>
+            <h2>References</h2>
+            <ul class="noBullet" style="list-style-type: '- ';">
+                <li><a href="https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">Producer-consumer problem - Wikipedia</a></li>
+            </ul>
+            <h2>Libraries</h2>
+            <ul class="noBullet" style="list-style-type: '- ';">
+                <li><a href="https://getbootstrap.com">Bootstrap</a></li>
+                <li><a href="https://p5js.org">p5.js</a></li>
+            </ul>
+            <center>
+                <p class="lead center">HE-Arc - 2019</p>
+            </center>
+        </div>
+    </body>
 </html>
