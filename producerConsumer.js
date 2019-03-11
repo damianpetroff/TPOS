@@ -1,9 +1,9 @@
 let producerConsumer;
 
 function setup() {
-    createCanvas(screen.width-18, screen.height-10);
+    createCanvas(WIDTH, HEIGHT);
     producerConsumer = new ProducerConsumer(3, 1, 1);
-    reset(DEFAULTVALUEBUFFERQTE);
+    reset(DEFAULT_VALUE_BUFFER_QTE);
 }
 
 function reset(nbBuffers)

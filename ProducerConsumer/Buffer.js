@@ -1,5 +1,5 @@
 class Buffer {
-    constructor(x, y, width, height, size, shape) {
+    constructor(x, y, width, height, size) {
         this.pos = createVector(x, y);
         this.dim = createVector(width, height);
         this.cellDim = createVector(width, height / size);
@@ -13,8 +13,6 @@ class Buffer {
         this.firstFree = 0;
         this.lastFree = 0;
         this.used = 0;
-
-        this.shape = shape;
     }
 
     // Update data ---
