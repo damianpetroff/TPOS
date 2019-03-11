@@ -18,6 +18,6 @@ function draw() {
 }
 
 function mousePressed() {
-    let fs = fullscreen();
-    fullscreen(!fs);
+    //let fs = fullscreen();
+    //fullscreen(!fs);
 }
