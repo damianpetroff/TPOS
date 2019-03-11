@@ -7,9 +7,12 @@ class EdgeBuffer {
         // do nothing
     }
 
-    pop() {
+    pick() {
+        push();
         colorMode(HSB, 255);
-        return color(random(255), 255, 255);
+        let c = color(random(255), 255, 255);
+        pop();
+        return c;
     }
 
     update() {

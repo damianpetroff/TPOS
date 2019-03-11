@@ -27,7 +27,7 @@ class Buffer {
         return true;
     }
 
-    pop() {
+    pick() {
         if (this.used <= 0)
             return false;
         let data = this.data[this.lastFree];
@@ -75,6 +75,7 @@ class Buffer {
             if (i == this.firstFree) {
                 fill(0, 255, 0);
                 drawRightArrow(xArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
+
             }
             if (i == this.lastFree) {
                 fill(255, 0, 0);

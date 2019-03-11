@@ -19,14 +19,13 @@ function draw() {
     producerConsumer.draw();
 }
 
-<<<<<<< HEAD
 function clickOn() {
 	//Empty
 }
 
 function toggleFullScreen(){
 	console.info("Toggle Fullscreen");
-	var isInFullScreen = 
+	var isInFullScreen =
 		(document.fullscreenElement && document.fullscreenElement !== null) ||
 	    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
 	    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
@@ -38,20 +37,20 @@ function toggleFullScreen(){
         {
           canvas.requestFullscreen();
         }
-        else if(canvas.mozRequestFullScreen) 
+        else if(canvas.mozRequestFullScreen)
         {
     	  canvas.mozRequestFullScreen();
-        } 
-        else if(canvas.webkitRequestFullScreen) 
+        }
+        else if(canvas.webkitRequestFullScreen)
         {
           canvas.webkitRequestFullScreen();
-        } 
-        else if(canvas.msRequestFullscreen) 
+        }
+        else if(canvas.msRequestFullscreen)
         {
           canvas.msRequestFullscreen();
         }
-    } 
-    else 
+    }
+    else
     {
         if (document.exitFullscreen)
         {
@@ -60,19 +59,14 @@ function toggleFullScreen(){
         else if (document.webkitExitFullscreen)
         {
             document.webkitExitFullscreen();
-        } 
-        else if (document.mozCancelFullScreen) 
+        }
+        else if (document.mozCancelFullScreen)
         {
             document.mozCancelFullScreen();
-        } 
+        }
         else if (document.msExitFullscreen)
         {
             document.msExitFullscreen();
         }
     }
-=======
-function mousePressed() {
-    //let fs = fullscreen();
-    //fullscreen(!fs);
->>>>>>> d1d17ce35d876b63c2289ee172b4b214aa6df88a
 }

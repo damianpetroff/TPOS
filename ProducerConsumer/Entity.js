@@ -24,7 +24,7 @@ class Entity {
             this.data = false;
             this.goTo(this.consumerBuffer.getRemovePosition());
         } else {
-            this.data = this.consumerBuffer.pop();
+            this.data = this.consumerBuffer.pick();
             this.goTo(this.productionBuffer.getAddPosition());
         }
     }
