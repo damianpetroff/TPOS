@@ -37,43 +37,39 @@
             </p>
             <hr>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <h3><img src="external/resources/img/flag_fr.png" alt="flag_fr" width="20" /> Introduction</h3>
-                <!--icon source : https://www.flaticon.com/ -->
-                <p>
-                    Ce application web vise à fournir une représentation graphique du patterne <a href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs">Producteur-Consommateur</a>.
-                </p>
-                <h3><img src="external/resources/img/flag_en.png" alt="flag_en" width="20" /> Introduction</h3>
-                <!--icon source : https://www.flaticon.com/ -->
-                <p>
-                    This web application aims to provide a graphical representation of the <a href="https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">Producer–consumer</a>.
-                </p>
-            </div>
-        </div>
-        <h3>Application</h3>
+        <h2><img src="external/resources/img/flag_fr.png" alt="flag_fr" width="20" /> Introduction</h2>
+        <!--icon source : https://www.flaticon.com/ -->
+        <p>
+            Ce application web vise à fournir une représentation graphique du patterne <a href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs">Producteur-Consommateur</a>.
+        </p>
+        <h2><img src="external/resources/img/flag_en.png" alt="flag_en" width="20" /> Introduction</h2>
+        <!--icon source : https://www.flaticon.com/ -->
+        <p>
+            This web application aims to provide a graphical representation of the <a href="https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">Producer–consumer</a>.
+        </p>
+
+        <h2>Application</h2>
         <div>
-            <label for="bufferQte">Nombre de buffers : </label>
-            <input id="bufferQte" type="range" class="form-control-range">
+            <label>
+                Nombre de buffers :
+                <input id="bufferQte" type="range" class="form-control-range">
+            </label>
             <span id="bufferQteLabel"></span>
         </div>
-    </div>
 
+        <label>Vitesse des entités</label>
+        <table id="table_entities" class="table w-100 text-center"></table>
 
-    <div class="container">
-        <div>
+        <div class="w-100 text-center p-2">
             <button id="btnSync" class="btn btn-primary">Synchronize</button>
             <button id="btnRestart" class="btn btn-primary">Restart</button>
             <button id="btnPause" class="btn btn-danger">Pause</button>
         </div>
-        <div>
-            <label>Vitesse des entités</label>
-            <table id="table_entities" class="table w-100 text-center"></table>
-        </div>
-        <div>
-            <div id="draw" onclick="toggleFullScreen();"></div>
-        </div>
+
+        <div id="draw" onclick="toggleFullScreen();"></div>
+
         <hr>
+
         <h2>References</h2>
         <ul class="noBullet" style="list-style-type: '- ';">
             <li><a href="https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">Producer-consumer problem - Wikipedia</a></li>
