@@ -23,7 +23,7 @@ window.addEventListener('load', function() {
         synchronize();
     });
     btnRestart.addEventListener("click", function() {
-        restart(bufferQte.value);
+        reset(parseInt(bufferQte.value));
     });
     btnPause.addEventListener("click", function() {
         logicStopButton();

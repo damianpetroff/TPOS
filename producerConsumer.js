@@ -4,7 +4,6 @@ let producerConsumer;
 function setup() {
     let canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("draw");
-    producerConsumer = new ProducerConsumer(3, 1, 1);
     reset(DEFAULT_BUFFER_QTE);
 }
 
