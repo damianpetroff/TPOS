@@ -78,11 +78,11 @@ class Buffer {
 
             if (i == this.firstFree) {
                 fill(0, 255, 0);
-                drawRightArrow(-heightArrow, y, heightArrow, widthArrow, thicknessArrow);
+                drawArrow(-heightArrow, y, heightArrow, widthArrow, thicknessArrow);
             }
             if (i == this.lastFree) {
                 fill(255, 0, 0);
-                drawRightArrow(this.cellDim.x, y, heightArrow, widthArrow, thicknessArrow);
+                drawArrow(this.cellDim.x, y, heightArrow, widthArrow, thicknessArrow);
             }
         }
         pop();

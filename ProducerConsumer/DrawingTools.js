@@ -1,5 +1,8 @@
-function drawRightArrow(x, y, height, width, thickness) {
+function drawArrow(x, y, height, width, thickness, angle=0) {
+    push();
     let widthTriangle = width >> 1;
+    //to fix if useful
+    // rotate(angle); //angle in radians
     beginShape();
     vertex(x + width, y + height / 2);
     vertex(x + widthTriangle, y);
@@ -9,28 +12,5 @@ function drawRightArrow(x, y, height, width, thickness) {
     vertex(x + widthTriangle, y + (height / 2) + thickness);
     vertex(x + widthTriangle, y + height);
     endShape();
-}
-
-function drawLeftArrow(x, y, height, width, thickness) {
-    translate(x + width, y + height);
-    rotate(PI);
-    drawRightArrow(0, 0, height, width, thickness);
-    rotate(-PI);
-    translate(-x - width, -y - height);
-}
-
-function drawUpArrow(x, y, height, width, thickness) {
-    translate(x + width, y);
-    rotate(PI / 2);
-    drawRightArrow(0, 0, height, width, thickness);
-    rotate(-PI / 2);
-    translate(-x - width, -y);
-}
-
-function drawDownArrow(x, y, height, width, thickness) {
-    translate(x, y + height);
-    rotate(-PI / 2);
-    drawRightArrow(0, 0, height, width, thickness);
-    rotate(PI / 2);
-    translate(-x, -y - height);
+    pop();
 }
