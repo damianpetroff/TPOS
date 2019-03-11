@@ -20,11 +20,21 @@ class EdgeBuffer {
         // do nothing
     }
 
+    isEmpty() {
+        //never empty
+        return false;
+    }
+
+    isFull() {
+        //never full
+        return false;
+    }
+
     getAddPosition() {
         return this.pos;
     }
 
-    getRemovePosition() {
+    getPopPosition() {
         return this.pos;
     }
 }

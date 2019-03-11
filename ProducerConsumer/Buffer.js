@@ -1,5 +1,5 @@
 class Buffer {
-    constructor(x, y, width, height, size, shape) {
+    constructor(x, y, width, height, size) {
         this.pos = createVector(x, y);
         this.dim = createVector(width, height);
         this.cellDim = createVector(width, height / size);
@@ -13,8 +13,6 @@ class Buffer {
         this.firstFree = 0;
         this.lastFree = 0;
         this.used = 0;
-
-        this.shape = shape;
     }
 
     // Update data ---
@@ -37,13 +35,21 @@ class Buffer {
         return data;
     }
 
+    isEmpty() {
+        return this.used <= 0;
+    }
+
+    isFull() {
+        return this.used >= this.data.length;
+    }
+
     getAddPosition() {
         let posX = this.pos.x;
         let posY = this.pos.y + this.firstFree * this.cellDim.y + this.cellDim.y / 2;
         return createVector(posX, posY);
     }
 
-    getRemovePosition() {
+    getPopPosition() {
         let posX = this.pos.x + this.dim.x;
         let posY = this.pos.y + this.lastFree * this.cellDim.y + this.cellDim.y / 2;
         return createVector(posX, posY);
