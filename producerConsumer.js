@@ -1,11 +1,11 @@
 let producerConsumer;
-let cWhidth = screen.width;
-let cHeight = screen.height;
+
 
 function setup() {
-    let canvas = createCanvas(cWhidth, cHeight);
+    let canvas = createCanvas(WIDTH, HEIGHT);
     canvas.parent("draw");
-    reset(DEFAULTVALUEBUFFERQTE);
+    producerConsumer = new ProducerConsumer(3, 1, 1);
+    reset(DEFAULT_VALUE_BUFFER_QTE);
 }
 
 function reset(nbBuffers)

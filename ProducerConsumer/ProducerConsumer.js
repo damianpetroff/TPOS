@@ -6,20 +6,17 @@ class ProducerConsumer {
 
         this.nbBuffers = nbBuffers;
 
-        this.marginX = 300;
-        this.marginY = 10;
+        let marginY = HEIGHT * 0.1;
+        let nbCols = 2 * this.nbBuffers + 1;
+        let colWidth = WIDTH / nbCols;
 
-        let remainingWidth = width - ((this.nbBuffers + 1) * this.marginX);
-        let remainingHeight = height - 2 * this.marginY;
-
-        this.bufferWidth = remainingWidth / this.nbBuffers;
-        this.bufferHeight = remainingHeight;
+        let bufferHeight = HEIGHT - 2 * marginY;
 
         this.buffers.push(new EdgeBuffer(0, HEIGHT / 2));
         for (let i = 0; i < this.nbBuffers; i++) {
-            let x = (i + 1) * this.marginX + this.bufferWidth * i;
-            let y = this.marginY;
-            this.buffers.push(new Buffer(x, y, this.bufferWidth, this.bufferHeight, 4, 'vertical'));
+            let x = (2 * i + 1) * colWidth;
+            let y = marginY;
+            this.buffers.push(new Buffer(x, y, colWidth, bufferHeight, 4));
         }
         this.buffers.push(new EdgeBuffer(WIDTH, HEIGHT / 2));
 
@@ -29,8 +26,6 @@ class ProducerConsumer {
             let producerBuffer = this.buffers[i + 1];
             this.entities.push(new Entity(consumerBuffer.pos.x, consumerBuffer.pos.y, consumerBuffer, producerBuffer));
         }
-
-        this.entities[0].debug = true;
     }
 
     update() {

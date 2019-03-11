@@ -1,12 +1,10 @@
 class Entity {
-    constructor(x, y, consumerBuffer, productionBuffer, debug = false) {
+    constructor(x, y, consumerBuffer, productionBuffer) {
         this.pos = consumerBuffer.getPopPosition();
-        this.size = 50;
+        this.size = min(WIDTH, HEIGHT) * 0.05;
         this.target = null;
         this.speed = 5;
         this.data = false;
-
-        this.debug = debug;
 
         this.consumerBuffer = consumerBuffer;
         this.productionBuffer = productionBuffer;

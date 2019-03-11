@@ -6,9 +6,9 @@ window.addEventListener('load', function () {
     let bufferQte = document.getElementById("bufferQte");
     let bufferQteLabel = document.getElementById("bufferQteLabel");
 
-    bufferQte.min = MINBUFFERQTE;
-    bufferQte.max = MAXBUFFERQTE;
-    bufferQte.value = DEFAULTVALUEBUFFERQTE;
+    bufferQte.min = MIN_BUFFER_QTE;
+    bufferQte.max = MAX_BUFFER_QTE;
+    bufferQte.value = DEFAULT_VALUE_BUFFER_QTE;
 
     bufferQte.addEventListener("input", setBufferQte);
     bufferQte.addEventListener("input", function(e) {
@@ -100,8 +100,8 @@ function entitesSpeedLogic() {
         let input = document.createElement("input");
         input.id = i;
         input.type = "number";
-        input.min = 1;
-        input.max = 10;
+        input.min = MIN_SPEED_ENTITY;
+        input.max = MAX_SPEED_ENTITY;
         input.value = producerConsumer.entities[i].speed;
         input.addEventListener("change", function(e) {
             changeEntitieSpeed(e.srcElement);
