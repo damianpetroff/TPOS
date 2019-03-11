@@ -1,6 +1,6 @@
 let pause = false;
 
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
     document.getElementById("lastModified").innerHTML = getFormattedDate(new Date(document.lastModified));
 
     let bufferQte = document.getElementById("bufferQte");
@@ -50,30 +50,29 @@ function updateLabel(range, label) {
 
 
 function getFormattedDate(date) {
-  var monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-  ];
+    var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
 
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
-  var hour = date.getHours();
-  var min = date.getMinutes();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    var hour = date.getHours();
+    var min = date.getMinutes();
 
-  return day + ' ' + monthNames[monthIndex] + ' ' + year + ' at ' + forceTwoDigits(hour) + ':' + forceTwoDigits(min);
+    return day + ' ' + monthNames[monthIndex] + ' ' + year + ' at ' + forceTwoDigits(hour) + ':' + forceTwoDigits(min);
 }
 
-function forceTwoDigits(number)
-{
-    if(number<10)
-    {
-        return '0'+str(number);
+function forceTwoDigits(number) {
+    if (number < 10) {
+        return '0' + str(number);
     }
     return number;
 }
+
 function changeEntitieSpeed(element) {
     producerConsumer.entities[parseInt(element.id)].speed = parseInt(element.value);
 }

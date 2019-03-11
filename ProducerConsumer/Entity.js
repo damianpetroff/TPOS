@@ -3,7 +3,7 @@ class Entity {
         this.pos = consumerBuffer.getPopPosition();
         this.size = min(WIDTH, HEIGHT) * 0.05;
         this.target = null;
-        this.speed = 5;
+        this.speed = DEFAULT_SPEED_ENTITY;
         this.data = false;
 
         this.consumerBuffer = consumerBuffer;

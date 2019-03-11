@@ -62,7 +62,7 @@ class Buffer {
         translate(this.pos.x, this.pos.y);
         for (let i = 0; i < this.data.length; i++) {
 
-            if(this.data[i])
+            if (this.data[i])
                 fill(this.data[i]);
             else
                 noFill();

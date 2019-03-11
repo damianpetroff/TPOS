@@ -8,8 +8,7 @@ function setup() {
     reset(DEFAULT_BUFFER_QTE);
 }
 
-function reset(nbBuffers)
-{
+function reset(nbBuffers) {
     producerConsumer = new ProducerConsumer(nbBuffers, 1, 1);
 }
 
@@ -20,52 +19,35 @@ function draw() {
 }
 
 function clickOn() {
-	//Empty
+    //Empty
 }
 
-function toggleFullScreen(){
-	console.info("Toggle Fullscreen");
-	var isInFullScreen =
-		(document.fullscreenElement && document.fullscreenElement !== null) ||
-	    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
-	    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
-	    (document.msFullscreenElement && document.msFullscreenElement !== null);
+function toggleFullScreen() {
+    console.info("Toggle Fullscreen");
+    var isInFullScreen =
+        (document.fullscreenElement && document.fullscreenElement !== null) ||
+        (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+        (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+        (document.msFullscreenElement && document.msFullscreenElement !== null);
 
-    if (!isInFullScreen)
-    {
-        if(canvas.requestFullscreen)
-        {
-          canvas.requestFullscreen();
+    if (!isInFullScreen) {
+        if (canvas.requestFullscreen) {
+            canvas.requestFullscreen();
+        } else if (canvas.mozRequestFullScreen) {
+            canvas.mozRequestFullScreen();
+        } else if (canvas.webkitRequestFullScreen) {
+            canvas.webkitRequestFullScreen();
+        } else if (canvas.msRequestFullscreen) {
+            canvas.msRequestFullscreen();
         }
-        else if(canvas.mozRequestFullScreen)
-        {
-    	  canvas.mozRequestFullScreen();
-        }
-        else if(canvas.webkitRequestFullScreen)
-        {
-          canvas.webkitRequestFullScreen();
-        }
-        else if(canvas.msRequestFullscreen)
-        {
-          canvas.msRequestFullscreen();
-        }
-    }
-    else
-    {
-        if (document.exitFullscreen)
-        {
+    } else {
+        if (document.exitFullscreen) {
             document.exitFullscreen();
-        }
-        else if (document.webkitExitFullscreen)
-        {
+        } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
-        }
-        else if (document.mozCancelFullScreen)
-        {
+        } else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
-        }
-        else if (document.msExitFullscreen)
-        {
+        } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
     }
