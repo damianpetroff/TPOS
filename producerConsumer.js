@@ -19,6 +19,7 @@ function draw() {
     producerConsumer.draw();
 }
 
+<<<<<<< HEAD
 function clickOn() {
 	//Empty
 }
@@ -69,4 +70,9 @@ function toggleFullScreen(){
             document.msExitFullscreen();
         }
     }
+=======
+function mousePressed() {
+    //let fs = fullscreen();
+    //fullscreen(!fs);
+>>>>>>> d1d17ce35d876b63c2289ee172b4b214aa6df88a
 }
