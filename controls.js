@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
 
     bufferQte.min = MIN_BUFFER_QTE;
     bufferQte.max = MAX_BUFFER_QTE;
-    bufferQte.value = DEFAULT_VALUE_BUFFER_QTE;
+    bufferQte.value = DEFAULT_BUFFER_QTE;
 
     bufferQte.addEventListener("input", setBufferQte);
     bufferQte.addEventListener("input", function(e) {
@@ -112,7 +112,7 @@ function entitesSpeedLogic() {
         input.min = MIN_SPEED_ENTITY;
         input.max = MAX_SPEED_ENTITY;
         input.value = producerConsumer.entities[i].speed;
-        input.addEventListener("change", function(e) {
+        input.addEventListener("input", function(e) {
             changeEntitieSpeed(e.srcElement);
         });
         tdSpeed.appendChild(input);

@@ -70,22 +70,19 @@ class Buffer {
 
             // draw Arrow
             let height = 5;
-
-
             let heightArrow = 30;
             let widthArrow = 30;
             let thicknessArrow = 5;
 
-            let xArrow = 0;
-            let yArrow = i * this.dim.y + this.dim.y/2 - heightArrow/2;
+            let y = i * this.cellDim.y + this.cellDim.y / 2 - widthArrow / 2;
+
             if (i == this.firstFree) {
                 fill(0, 255, 0);
-                drawRightArrow(xArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
-
+                drawRightArrow(-heightArrow, y, heightArrow, widthArrow, thicknessArrow);
             }
             if (i == this.lastFree) {
                 fill(255, 0, 0);
-                drawRightArrow(xArrow+this.dim.x-widthArrow, yArrow, heightArrow, widthArrow, thicknessArrow);
+                drawRightArrow(this.cellDim.x, y, heightArrow, widthArrow, thicknessArrow);
             }
         }
         pop();
