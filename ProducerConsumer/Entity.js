@@ -1,6 +1,6 @@
 class Entity {
-    constructor(x, y, consumerBuffer, productionBuffer, id) {
-        this.id = id;
+    constructor(x, y, consumerBuffer, productionBuffer, label) {
+        this.label = label;
         this.pos = consumerBuffer.getPopPosition();
         this.size = min(WIDTH, HEIGHT) * 0.05;
         this.target = null;
@@ -53,9 +53,14 @@ class Entity {
 
             if (this.data == false) {
                 this.data = this.consumerBuffer.pick();
+                let r = this.data.levels[0];
+                let g = this.data.levels[1];
+                let b = this.data.levels[2];
+                this.label.style.cssText="background-color: rgb("+r+","+g+","+b+");";
             } else {
                 this.productionBuffer.add(this.data);
                 this.data = false;
+                this.label.style.cssText="background-color: white;";
             }
         }
 

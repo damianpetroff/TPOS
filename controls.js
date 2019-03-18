@@ -45,22 +45,22 @@ window.addEventListener('load', function() {
         logicStopButton();
     });
 
-    updateLabels();
+    resetFromDOM();
 
 }, false);
 
 function updateLabels() {
     updateLabel(bufferQte, bufferQteLabel);
     updateLabel(bufferSize, bufferSizeLabel);
-    entitesSpeedLogic();
     resetFlexWrap();
 }
 
 function resetFromDOM()
 {
-    reset(int(bufferQte.value), int(bufferSize.value));
-    entitesSpeedLogic();
+    let entitiesLabels = entitesSpeedLogic();
+    reset(int(bufferQte.value), int(bufferSize.value), entitiesLabels);
     resetFlexWrap();
+    updateLabels();
 }
 
 function updateLabel(range, label) {
@@ -124,7 +124,6 @@ function entitesSpeedLogic() {
         let entityLabel = document.createElement("div");
         entityLabel.id = "entity_label_"+i;
         entityLabel.classList.add("text-center", "circleBase");
-        entityLabel.innerHTML = i;
 
         tab.push(entityLabel);
 
@@ -138,7 +137,7 @@ function entitesSpeedLogic() {
         input.type = "number";
         input.min = MIN_SPEED_ENTITY;
         input.max = MAX_SPEED_ENTITY;
-        input.value = producerConsumer.entities[i].speed;
+        input.value = DEFAULT_SPEED_ENTITY;
         input.addEventListener("input", function(e) {
             changeEntitySpeed(e.srcElement);
         });

@@ -12,11 +12,10 @@ function setup() {
     document.body.onresize = widthChange;
     widthChange();
 
-    reset(DEFAULT_BUFFER_QTE, DEFAULT_BUFFER_SIZE);
 }
 
-function reset(nbBuffers, bufferSize) {
-    producerConsumer = new ProducerConsumer(nbBuffers, bufferSize);
+function reset(nbBuffers, bufferSize, entitiesLabels) {
+    producerConsumer = new ProducerConsumer(nbBuffers, bufferSize, entitiesLabels);
 }
 
 function widthChange() {
@@ -27,8 +26,11 @@ function widthChange() {
 
 function draw() {
     background(42);
-    producerConsumer.update();
-    producerConsumer.draw();
+    if(producerConsumer)
+    {
+        producerConsumer.update();
+        producerConsumer.draw();
+    }
 }
 
 function toggleFullScreen() {
