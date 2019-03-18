@@ -45,22 +45,22 @@ window.addEventListener('load', function() {
         logicStopButton();
     });
 
-    updateLabels();
+    resetFromDOM();
 
 }, false);
 
 function updateLabels() {
     updateLabel(bufferQte, bufferQteLabel);
     updateLabel(bufferSize, bufferSizeLabel);
-    entitesSpeedLogic();
     resetFlexWrap();
 }
 
 function resetFromDOM()
 {
-    reset(int(bufferQte.value), int(bufferSize.value));
-    entitesSpeedLogic();
+    let entitiesLabels = entitesSpeedLogic();
+    reset(int(bufferQte.value), int(bufferSize.value), entitiesLabels);
     resetFlexWrap();
+    updateLabels();
 }
 
 function updateLabel(range, label) {
@@ -91,7 +91,7 @@ function forceTwoDigits(number) {
     return number;
 }
 
-function changeEntitieSpeed(element) {
+function changeEntitySpeed(element) {
     producerConsumer.entities[parseInt(element.id)].speed = parseInt(element.value);
 }
 
@@ -113,12 +113,21 @@ function entitesSpeedLogic() {
     let thSpeed = document.createElement("th");
     thSpeed.innerHTML = "Vitesse";
     trSpeed.appendChild(thSpeed);
+    
+    let tab = [];
 
     // add new rows
     let entitiesQte = int(bufferQte.value) + 1;
     for (let i = 0; i < entitiesQte; i++) {
         let tdEntities = document.createElement("td");
-        tdEntities.innerHTML = i;
+        tdEntities.classList.add("text-center");
+        let entityLabel = document.createElement("div");
+        entityLabel.id = "entity_label_"+i;
+        entityLabel.classList.add("text-center", "circleBase");
+
+        tab.push(entityLabel);
+
+        tdEntities.appendChild(entityLabel);
         trEntities.appendChild(tdEntities);
 
         let tdSpeed = document.createElement("td");
@@ -128,14 +137,15 @@ function entitesSpeedLogic() {
         input.type = "number";
         input.min = MIN_SPEED_ENTITY;
         input.max = MAX_SPEED_ENTITY;
-        input.value = producerConsumer.entities[i].speed;
+        input.value = DEFAULT_SPEED_ENTITY;
         input.addEventListener("input", function(e) {
-            changeEntitieSpeed(e.srcElement);
+            changeEntitySpeed(e.srcElement);
         });
         tdSpeed.appendChild(input);
 
         trSpeed.appendChild(tdSpeed);
     }
+    return tab;
 }
 
 function logicStopButton() {
