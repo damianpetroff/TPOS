@@ -1,6 +1,6 @@
 class ProducerConsumer {
 
-    constructor(nbBuffers) {
+    constructor(nbBuffers, bufferSize) {
         this.buffers = [];
         this.entities = [];
 
@@ -16,7 +16,7 @@ class ProducerConsumer {
         for (let i = 0; i < this.nbBuffers; i++) {
             let x = (2 * i + 1) * colWidth;
             let y = marginY;
-            this.buffers.push(new Buffer(x, y, colWidth, bufferHeight, 4));
+            this.buffers.push(new Buffer(x, y, colWidth, bufferHeight, bufferSize));
         }
         this.buffers.push(new EdgeBuffer(WIDTH, HEIGHT / 2));
 
