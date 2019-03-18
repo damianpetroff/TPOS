@@ -38,7 +38,7 @@ window.addEventListener('load', function() {
         synchronize();
     });
     btnRestart.addEventListener("click", function() {
-        reset(parseInt(bufferQte.value));
+        resetFromDOM();
     });
     btnPause.addEventListener("click", function() {
         logicStopButton();

@@ -18,13 +18,19 @@ class Entity {
     }
 
     handleTarget() {
-        if (this.data == false && !this.consumerBuffer.isEmpty()) {
+        if (this.data == false) {
             this.target = this.consumerBuffer;
-        } else if (this.data != false && !this.productionBuffer.isFull()) {
-            this.target = this.productionBuffer;
         } else {
-            this.target = null;
+            this.target = this.productionBuffer;
         }
+
+        // if (this.data == false && !this.consumerBuffer.isEmpty()) {
+        //     this.target = this.consumerBuffer;
+        // } else if (this.data != false && !this.productionBuffer.isFull()) {
+        //     this.target = this.productionBuffer;
+        // } else {
+        //     this.target = null;
+        // }
     }
 
     updatePosition() {
@@ -51,10 +57,14 @@ class Entity {
             this.pos = createVector(targetPosition.x, targetPosition.y); // set it to the target
 
             if (this.data == false) {
-                this.data = this.consumerBuffer.pick();
+                if (!this.consumerBuffer.isEmpty()) {
+                    this.data = this.consumerBuffer.pick();
+                }
             } else {
-                this.productionBuffer.add(this.data);
-                this.data = false;
+                if (!this.productionBuffer.isFull()) {
+                    this.productionBuffer.add(this.data);
+                    this.data = false;
+                }
             }
         }
 

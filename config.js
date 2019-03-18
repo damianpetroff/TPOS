@@ -1,6 +1,6 @@
 //Global constants
 
-//set in the
+//set in the canvas size
 let WIDTH = screen.width;
 let HEIGHT = screen.height;
 
