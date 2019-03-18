@@ -20,7 +20,6 @@ class ProducerConsumer {
         }
         this.buffers.push(new EdgeBuffer(WIDTH, HEIGHT / 2));
 
-
         for (let i = 0; i < this.nbBuffers + 1; i++) {
             let consumerBuffer = this.buffers[i];
             let producerBuffer = this.buffers[i + 1];
@@ -49,6 +48,13 @@ class ProducerConsumer {
         for (let i = 0; i < this.entities.length; i++) {
             let entity = this.entities[i]
             entity.draw();
+        }
+    }
+
+    setSync(b){
+        for (let i = 0; i < this.entities.length; i++) {
+            let entity = this.entities[i]
+            entity.setSync(b);
         }
     }
 

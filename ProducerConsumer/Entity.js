@@ -6,6 +6,7 @@ class Entity {
         this.target = null;
         this.speed = DEFAULT_SPEED_ENTITY;
         this.data = false;
+        this.sync = DEFAULT_MODE_SYNC;
 
         this.consumerBuffer = consumerBuffer;
         this.productionBuffer = productionBuffer;
@@ -24,14 +25,10 @@ class Entity {
         } else {
             this.target = this.productionBuffer;
         }
+    }
 
-        // if (this.data == false && !this.consumerBuffer.isEmpty()) {
-        //     this.target = this.consumerBuffer;
-        // } else if (this.data != false && !this.productionBuffer.isFull()) {
-        //     this.target = this.productionBuffer;
-        // } else {
-        //     this.target = null;
-        // }
+    setSync(b) {
+        this.sync = b;
     }
 
     updatePosition() {
@@ -73,7 +70,6 @@ class Entity {
                 }
             }
         }
-
         return false;
     }
 

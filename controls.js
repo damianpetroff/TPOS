@@ -113,7 +113,7 @@ function entitesSpeedLogic() {
     let thSpeed = document.createElement("th");
     thSpeed.innerHTML = "Vitesse";
     trSpeed.appendChild(thSpeed);
-    
+
     let tab = [];
 
     // add new rows
@@ -142,7 +142,6 @@ function entitesSpeedLogic() {
             changeEntitySpeed(e.srcElement);
         });
         tdSpeed.appendChild(input);
-
         trSpeed.appendChild(tdSpeed);
     }
     return tab;
