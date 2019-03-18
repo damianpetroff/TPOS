@@ -24,7 +24,7 @@ class ProducerConsumer {
         for (let i = 0; i < this.nbBuffers + 1; i++) {
             let consumerBuffer = this.buffers[i];
             let producerBuffer = this.buffers[i + 1];
-            this.entities.push(new Entity(consumerBuffer.pos.x, consumerBuffer.pos.y, consumerBuffer, producerBuffer));
+            this.entities.push(new Entity(consumerBuffer.pos.x, consumerBuffer.pos.y, consumerBuffer, producerBuffer, i));
         }
     }
 

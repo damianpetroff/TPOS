@@ -76,7 +76,7 @@ function forceTwoDigits(number) {
     return number;
 }
 
-function changeEntitieSpeed(element) {
+function changeEntitySpeed(element) {
     producerConsumer.entities[parseInt(element.id)].speed = parseInt(element.value);
 }
 
@@ -98,12 +98,22 @@ function entitesSpeedLogic() {
     let thSpeed = document.createElement("th");
     thSpeed.innerHTML = "Vitesse";
     trSpeed.appendChild(thSpeed);
+    
+    let tab = [];
 
     // add new rows
     let entitiesQte = int(bufferQte.value) + 1;
     for (let i = 0; i < entitiesQte; i++) {
         let tdEntities = document.createElement("td");
-        tdEntities.innerHTML = i;
+        tdEntities.classList.add("text-center");
+        let entityLabel = document.createElement("div");
+        entityLabel.id = "entity_label_"+i;
+        entityLabel.classList.add("text-center", "circleBase");
+        entityLabel.innerHTML = i;
+
+        tab.push(entityLabel);
+
+        tdEntities.appendChild(entityLabel);
         trEntities.appendChild(tdEntities);
 
         let tdSpeed = document.createElement("td");
@@ -115,12 +125,13 @@ function entitesSpeedLogic() {
         input.max = MAX_SPEED_ENTITY;
         input.value = producerConsumer.entities[i].speed;
         input.addEventListener("input", function(e) {
-            changeEntitieSpeed(e.srcElement);
+            changeEntitySpeed(e.srcElement);
         });
         tdSpeed.appendChild(input);
 
         trSpeed.appendChild(tdSpeed);
     }
+    return tab;
 }
 
 function logicStopButton() {
