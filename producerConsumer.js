@@ -12,11 +12,11 @@ function setup() {
     document.body.onresize = widthChange;
     widthChange();
 
-    reset(DEFAULT_BUFFER_QTE);
+    reset(DEFAULT_BUFFER_QTE, DEFAULT_BUFFER_SIZE);
 }
 
-function reset(nbBuffers) {
-    producerConsumer = new ProducerConsumer(nbBuffers);
+function reset(nbBuffers, bufferSize) {
+    producerConsumer = new ProducerConsumer(nbBuffers, bufferSize);
 }
 
 function widthChange() {

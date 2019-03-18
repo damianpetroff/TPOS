@@ -1,10 +1,14 @@
 let pause = false;
+let bufferQte;
+let bufferSize;
 
 window.addEventListener('load', function() {
     document.getElementById("lastModified").innerHTML = getFormattedDate(new Date(document.lastModified));
 
-    let bufferQte = document.getElementById("bufferQte");
+    bufferQte = document.getElementById("bufferQte");
     let bufferQteLabel = document.getElementById("bufferQteLabel");
+    bufferSize = document.getElementById("bufferSize");
+    let bufferSizeLabel = document.getElementById("bufferSizeLabel");
 
     let producerConsumerCanvasContainer = document.getElementById("producerConsumerCanvasContainer");
     producerConsumerCanvasContainer.addEventListener("click", toggleFullScreen);
@@ -13,9 +17,17 @@ window.addEventListener('load', function() {
     bufferQte.max = MAX_BUFFER_QTE;
     bufferQte.value = DEFAULT_BUFFER_QTE;
 
-    bufferQte.addEventListener("input", setBufferQte);
+    bufferSize.min = MIN_BUFFER_SIZE;
+    bufferSize.max = MAX_BUFFER_SIZE;
+    bufferSize.value = DEFAULT_BUFFER_SIZE;
+
+    bufferQte.addEventListener("input", resetFromDOM);
     bufferQte.addEventListener("input", function(e) {
         updateLabel(e.srcElement, bufferQteLabel);
+    });
+    bufferSize.addEventListener("input", resetFromDOM);
+    bufferSize.addEventListener("input", function(e) {
+        updateLabel(e.srcElement, bufferSizeLabel);
     });
 
     let btnSync = document.getElementById("btnSync");
@@ -38,19 +50,19 @@ window.addEventListener('load', function() {
 
 function updateLabels() {
     updateLabel(bufferQte, bufferQteLabel);
+    updateLabel(bufferSize, bufferSizeLabel);
     entitesSpeedLogic();
 }
 
-function setBufferQte(e) {
-    reset(int(e.srcElement.value));
+function resetFromDOM()
+{
+    reset(int(bufferQte.value), int(bufferSize.value));
     entitesSpeedLogic();
 }
 
 function updateLabel(range, label) {
     label.innerHTML = range.value;
 }
-
-
 
 function getFormattedDate(date) {
     var monthNames = [
