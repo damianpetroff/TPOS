@@ -39,7 +39,7 @@ window.addEventListener('load', function() {
     });
     btnRestart.addEventListener("click", function() {
         reset(parseInt(bufferQte.value));
-        log_reset();
+        resetFlexWrap();
     });
     btnPause.addEventListener("click", function() {
         logicStopButton();
@@ -53,14 +53,14 @@ function updateLabels() {
     updateLabel(bufferQte, bufferQteLabel);
     updateLabel(bufferSize, bufferSizeLabel);
     entitesSpeedLogic();
-    log_reset();
+    resetFlexWrap();
 }
 
 function resetFromDOM()
 {
     reset(int(bufferQte.value), int(bufferSize.value));
     entitesSpeedLogic();
-    log_reset();
+    resetFlexWrap();
 }
 
 function updateLabel(range, label) {
@@ -157,8 +157,7 @@ function synchronize() {
     // TODO
 }
 
-function log_reset() {
-
-  let log = document.getElementById("log");
-  log.innerHTML = '';
+function resetFlexWrap() {
+  let l = document.getElementById("entitiesConsumed");
+  l.innerHTML = '';
 }
