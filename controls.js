@@ -39,6 +39,7 @@ window.addEventListener('load', function() {
     });
     btnRestart.addEventListener("click", function() {
         resetFromDOM();
+        log_reset();
     });
     btnPause.addEventListener("click", function() {
         logicStopButton();
@@ -52,12 +53,14 @@ function updateLabels() {
     updateLabel(bufferQte, bufferQteLabel);
     updateLabel(bufferSize, bufferSizeLabel);
     entitesSpeedLogic();
+    log_reset();
 }
 
 function resetFromDOM()
 {
     reset(int(bufferQte.value), int(bufferSize.value));
     entitesSpeedLogic();
+    log_reset();
 }
 
 function updateLabel(range, label) {
@@ -150,11 +153,12 @@ function logicStopButton() {
     pause ^= true;
 }
 
-function restart(bufferQuantity) {
-    // quantity is true, but donno why it's bugged
-    reset(bufferQuantity);
-}
-
 function synchronize() {
     // TODO
+}
+
+function log_reset() {
+
+  let log = document.getElementById("log");
+  log.innerHTML = '';
 }
