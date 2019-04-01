@@ -1,37 +1,41 @@
 class Entity {
-    constructor(x, y, consumerBuffer, productionBuffer, label) {
+    constructor(consumerBuffer, productionBuffer, label) {
+        this.consumerBuffer = consumerBuffer;
+        this.productionBuffer = productionBuffer;
+
         this.label = label;
-        this.pos = consumerBuffer.getPopPosition();
+
+        this.step = 0;
+        this.max_steps = 100;
+
         this.size = min(WIDTH, HEIGHT) * 0.05;
-        this.target = null;
-        this.speed = DEFAULT_SPEED_ENTITY;
-        this.relativeSpeed = this.speed;
+
+        this.origin = this.consumerBuffer;
+        this.target = this.productionBuffer;
+
         this.data = false;
         this.sync = DEFAULT_MODE_SYNC;
 
-        this.consumerBuffer = consumerBuffer;
-        this.productionBuffer = productionBuffer;
 
         this.handleTarget();
     }
 
     update() {
         this.handleTarget();
-        this.updatePosition();
+        let hasReached = this.updatePosition();
+        if (hasReached) {
+            this.addPickLogic();
+        }
     }
 
     handleTarget() {
-        let previousTarget = this.target;
         if (this.data == false) {
+            this.origin = this.productionBuffer;
             this.target = this.consumerBuffer;
         } else {
+            this.origin = this.consumerBuffer;
             this.target = this.productionBuffer;
         }
-        // if (this.target != previousTarget) {
-        //     let d = p5.Vector.sub(this.target.pos, this.pos).mag();
-        //     this.relativeSpeed = d * this.speed * 0.005;
-        //     console.log(this.relativeSpeed);
-        // }
     }
 
     setSync(b) {
@@ -39,35 +43,21 @@ class Entity {
     }
 
     updatePosition() {
-        if (this.target == null)
-            return false;
-
-        let targetPosition = null;
-        if (this.target == this.consumerBuffer) {
-            targetPosition = this.target.getPopPosition();
-        } else if (this.target == this.productionBuffer) {
-            targetPosition = this.target.getAddPosition();
-        }
-
-        let d = p5.Vector.sub(targetPosition, this.pos);
-
-        //must go to the target
-        if (d.mag() >= this.relativeSpeed) {
-            d.normalize();
-            d.mult(this.relativeSpeed);
-            this.pos.add(d);
-        }
+        this.step += 1;
         //has reached the target
-        else {
-            this.pos = createVector(targetPosition.x, targetPosition.y); // set it to the target
-
-            if (this.sync) {
-                this.syncLogic();
-            } else {
-                this.asyncLogic();
-            }
+        if (this.step >= this.max_steps) {
+            this.step = 0;
+            return true;
         }
         return false;
+    }
+
+    addPickLogic() {
+        if (this.sync) {
+            this.syncLogic();
+        } else {
+            this.asyncLogic();
+        }
     }
 
     asyncLogic() {
@@ -117,12 +107,27 @@ class Entity {
     draw() {
         push();
         ellipseMode(CENTER);
+
         if (this.data) {
             fill(this.data);
         } else {
             fill(255);
         }
-        ellipse(this.pos.x, this.pos.y, this.size, this.size);
+
+        let targetPosition;
+        let originPosition;
+        if (this.target == this.consumerBuffer) {
+            targetPosition = this.target.getPopPosition();
+            originPosition = this.origin.getAddPosition();
+        } else {
+            targetPosition = this.target.getAddPosition();
+            originPosition = this.origin.getPopPosition();
+        }
+
+        let diff = p5.Vector.sub(targetPosition, originPosition);
+        diff.div(this.max_steps);
+        diff.mult(this.step);
+        ellipse(originPosition.x + diff.x, originPosition.y + diff.y, this.size, this.size);
         pop();
     }
 }
