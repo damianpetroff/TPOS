@@ -17,12 +17,10 @@ class Buffer {
 
     // Update data ---
     add(color) {
-        if (this.used >= this.data.length)
-            return false;
         this.data[this.firstFree] = color;
         this.firstFree = (this.firstFree + 1) % this.data.length; //
         this.used++;
-        return true;
+        return this.used >= this.data.length;
     }
 
     pick() {

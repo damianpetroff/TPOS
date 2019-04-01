@@ -1,16 +1,22 @@
-let pause = false;
-let bufferQte;
-let bufferSize;
+let pause;
+let sync;
+
+let lastModified = document.getElementById("lastModified");
+
+let bufferQte = document.getElementById("bufferQte");
+let bufferQteLabel = document.getElementById("bufferQteLabel");
+let bufferSize = document.getElementById("bufferSize");
+let bufferSizeLabel = document.getElementById("bufferSizeLabel");
+let producerConsumerCanvasContainer = document.getElementById("producerConsumerCanvasContainer");
+
+//Buttons
+let btnSync = document.getElementById("btnSync");
+let btnRestart = document.getElementById("btnRestart");
+let btnPause = document.getElementById("btnPause");
 
 window.addEventListener('load', function() {
-    document.getElementById("lastModified").innerHTML = getFormattedDate(new Date(document.lastModified));
+    lastModified.innerHTML = getFormattedDate(new Date(document.lastModified));
 
-    bufferQte = document.getElementById("bufferQte");
-    let bufferQteLabel = document.getElementById("bufferQteLabel");
-    bufferSize = document.getElementById("bufferSize");
-    let bufferSizeLabel = document.getElementById("bufferSizeLabel");
-
-    let producerConsumerCanvasContainer = document.getElementById("producerConsumerCanvasContainer");
     producerConsumerCanvasContainer.addEventListener("click", toggleFullScreen);
 
     bufferQte.min = MIN_BUFFER_QTE;
@@ -30,22 +36,20 @@ window.addEventListener('load', function() {
         updateLabel(e.srcElement, bufferSizeLabel);
     });
 
-    let btnSync = document.getElementById("btnSync");
-    let btnRestart = document.getElementById("btnRestart");
-    let btnPause = document.getElementById("btnPause");
-
     btnSync.addEventListener("click", function() {
-        synchronize();
+        toggleSynchronize();
     });
     btnRestart.addEventListener("click", function() {
         resetFromDOM();
         resetFlexWrap();
     });
     btnPause.addEventListener("click", function() {
-        logicStopButton();
+        togglePause();
     });
 
     resetFromDOM();
+    togglePause(false);
+    toggleSynchronize(false);
 
 }, false);
 
@@ -55,10 +59,9 @@ function updateLabels() {
     resetFlexWrap();
 }
 
-function resetFromDOM()
-{
+function resetFromDOM() {
     let entitiesLabels = entitesSpeedLogic();
-    reset(int(bufferQte.value), int(bufferSize.value), entitiesLabels);
+    reset(parseInt(bufferQte.value), parseInt(bufferSize.value), entitiesLabels);
     resetFlexWrap();
     updateLabels();
 }
@@ -117,12 +120,12 @@ function entitesSpeedLogic() {
     let tab = [];
 
     // add new rows
-    let entitiesQte = int(bufferQte.value) + 1;
+    let entitiesQte = parseInt(bufferQte.value) + 1;
     for (let i = 0; i < entitiesQte; i++) {
         let tdEntities = document.createElement("td");
         tdEntities.classList.add("text-center");
         let entityLabel = document.createElement("div");
-        entityLabel.id = "entity_label_"+i;
+        entityLabel.id = "entity_label_" + i;
         entityLabel.classList.add("text-center", "circleBase");
 
         tab.push(entityLabel);
@@ -147,26 +150,40 @@ function entitesSpeedLogic() {
     return tab;
 }
 
-function logicStopButton() {
+function togglePause(b = undefined) {
+    pause ^= true;
+    if (b != undefined)
+        pause = b;
     if (pause) {
-        btnPause.innerText = "Pause";
-        btnPause.classList.add("btn-danger");
-        btnPause.classList.remove("btn-success");
-        loop();
-    } else {
         btnPause.innerText = "Resume";
         btnPause.classList.remove("btn-danger");
         btnPause.classList.add("btn-success");
         noLoop();
+    } else {
+        btnPause.innerText = "Pause";
+        btnPause.classList.add("btn-danger");
+        btnPause.classList.remove("btn-success");
+        loop();
     }
-    pause ^= true;
 }
 
-function synchronize() {
-    // TODO
+function toggleSynchronize(b = undefined) {
+    sync ^= true;
+    if (b != undefined)
+        sync = b;
+    if (sync) {
+        btnSync.innerText = "Synchrone";
+        btnSync.classList.add("btn-dark");
+        btnSync.classList.remove("btn-secondary");
+    } else {
+        btnSync.innerText = "Asynchrone";
+        btnSync.classList.remove("btn-dark");
+        btnSync.classList.add("btn-secondary");
+    }
+    producerConsumer.setSync(sync);
 }
 
 function resetFlexWrap() {
-  let l = document.getElementById("entitiesConsumed");
-  l.innerHTML = '';
+    let l = document.getElementById("entitiesConsumed");
+    l.innerHTML = '';
 }

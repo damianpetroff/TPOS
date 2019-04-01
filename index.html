@@ -11,7 +11,7 @@
 
     <!-- CUSTOM JS -->
     <script src="config.js"></script>
-    <script src="controls.js"></script>
+    <script src="controls.js" defer></script>
     <script src="producerConsumer.js"></script>
     <script src="ProducerConsumer/DrawingTools.js"></script>
     <script src="ProducerConsumer/ProducerConsumer.js"></script>
@@ -70,15 +70,15 @@
         <table id="table_entities" class="table w-100 text-center"></table>
 
         <div class="w-100 text-center p-2">
-            <button id="btnSync" class="btn btn-primary">Synchronize</button>
+            <button id="btnSync" class="btn"></button>
             <button id="btnRestart" class="btn btn-primary">Restart</button>
-            <button id="btnPause" class="btn btn-danger">Pause</button>
+            <button id="btnPause" class="btn"></button>
         </div>
 
         <div id="producerConsumerCanvasContainer"></div>
+        <small class="float-right text-muted">Click on the canvas to Fullscreen, Esc. to quit</small>
 
-        <hr>
-        <h2>Consumed Entities</h2>
+        <h2 class="pt-3">Consumed Entities</h2>
 
         <!-- OVERFLOW WITH SCROLL-BAR -->
         <!--<div class="d-flex flex-wrap" id="entitiesConsumed" style="overflow: auto; height: 210px">-->

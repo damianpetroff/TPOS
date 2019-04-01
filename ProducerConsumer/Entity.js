@@ -54,23 +54,58 @@ class Entity {
         else {
             this.pos = createVector(targetPosition.x, targetPosition.y); // set it to the target
 
-            if (this.data == false) {
-                if (!this.consumerBuffer.isEmpty()) {
-                    this.data = this.consumerBuffer.pick();
-                    let r = this.data.levels[0];
-                    let g = this.data.levels[1];
-                    let b = this.data.levels[2];
-                    this.label.style.cssText="background-color: rgb("+r+","+g+","+b+");";
-                }
+            if (this.sync) {
+                this.syncLogic();
             } else {
-                if (!this.productionBuffer.isFull()) {
-                    this.productionBuffer.add(this.data);
-                    this.data = false;
-                    this.label.style.cssText="background-color: white;";
-                }
+                this.asyncLogic();
             }
         }
         return false;
+    }
+
+    asyncLogic() {
+        if (this.data == false) {
+            if (!this.consumerBuffer.isEmpty()) {
+                this.pick();
+            }
+        } else {
+            if (!this.productionBuffer.isFull()) {
+                this.add();
+            }
+        }
+    }
+
+    syncLogic() {
+        if (this.data == false) {
+            if (this.consumerBuffer.isEmpty()) {
+                // TODO
+                // console.log("error");
+                // noLoop();
+            } else {
+                this.pick();
+            }
+        } else {
+            let hasOverride = this.add();
+            if(hasOverride)
+            {
+                // TODO
+            }
+        }
+    }
+
+    add() {
+        let hasOverride = this.productionBuffer.add(this.data);
+        this.data = false;
+        this.label.style.cssText = "background-color: white;";
+        return hasOverride;
+    }
+
+    pick() {
+        this.data = this.consumerBuffer.pick();
+        let r = this.data.levels[0];
+        let g = this.data.levels[1];
+        let b = this.data.levels[2];
+        this.label.style.cssText = "background-color: rgb(" + r + "," + g + "," + b + ");";
     }
 
     draw() {
