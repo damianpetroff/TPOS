@@ -5,6 +5,7 @@ class Entity {
         this.size = min(WIDTH, HEIGHT) * 0.05;
         this.target = null;
         this.speed = DEFAULT_SPEED_ENTITY;
+        this.relativeSpeed = this.speed;
         this.data = false;
         this.sync = DEFAULT_MODE_SYNC;
 
@@ -20,11 +21,17 @@ class Entity {
     }
 
     handleTarget() {
+        let previousTarget = this.target;
         if (this.data == false) {
             this.target = this.consumerBuffer;
         } else {
             this.target = this.productionBuffer;
         }
+        // if (this.target != previousTarget) {
+        //     let d = p5.Vector.sub(this.target.pos, this.pos).mag();
+        //     this.relativeSpeed = d * this.speed * 0.005;
+        //     console.log(this.relativeSpeed);
+        // }
     }
 
     setSync(b) {
@@ -45,9 +52,9 @@ class Entity {
         let d = p5.Vector.sub(targetPosition, this.pos);
 
         //must go to the target
-        if (d.mag() >= this.speed) {
+        if (d.mag() >= this.relativeSpeed) {
             d.normalize();
-            d.mult(this.speed);
+            d.mult(this.relativeSpeed);
             this.pos.add(d);
         }
         //has reached the target
@@ -86,8 +93,7 @@ class Entity {
             }
         } else {
             let hasOverride = this.add();
-            if(hasOverride)
-            {
+            if (hasOverride) {
                 // TODO
             }
         }
