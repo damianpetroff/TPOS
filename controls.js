@@ -95,7 +95,7 @@ function forceTwoDigits(number) {
 }
 
 function changeEntitySpeed(element) {
-    producerConsumer.entities[parseInt(element.id)].speed = parseInt(element.value);
+    producerConsumer.entities[parseInt(element.id)].setSpeed(parseInt(element.value));
 }
 
 function entitesSpeedLogic() {

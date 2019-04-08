@@ -10,32 +10,34 @@ class Entity {
 
         this.size = min(WIDTH, HEIGHT) * 0.05;
 
-        this.origin = this.consumerBuffer;
-        this.target = this.productionBuffer;
-
         this.data = false;
         this.sync = DEFAULT_MODE_SYNC;
 
+        this.hasReached = false;
 
-        this.handleTarget();
+        this.originPosition = this.productionBuffer.getAddPosition();
+        this.targetPosition = this.consumerBuffer.getPopPosition();
+    }
+
+    setSpeed(s) {
+        if (Number.isInteger(s) && s > 0) {
+            this.percentStep = this.step / this.max_steps;
+            this.max_steps = 1 / s * 500;
+            this.step = this.percentStep * this.max_steps;
+            return true;
+        }
+        return false;
+    }
+
+    preupdate() {
+        this.hasReached = this.updatePosition();
     }
 
     update() {
-        this.handleTarget();
-        let hasReached = this.updatePosition();
-        if (hasReached) {
+        if (this.hasReached) {
             this.addPickLogic();
         }
-    }
-
-    handleTarget() {
-        if (this.data == false) {
-            this.origin = this.productionBuffer;
-            this.target = this.consumerBuffer;
-        } else {
-            this.origin = this.consumerBuffer;
-            this.target = this.productionBuffer;
-        }
+        this.hasReached = false;
     }
 
     setSync(b) {
@@ -60,19 +62,27 @@ class Entity {
         }
     }
 
-    asyncLogic() {
+    syncLogic() {
         if (this.data == false) {
             if (!this.consumerBuffer.isEmpty()) {
                 this.pick();
+                this.originPosition = this.targetPosition;
+                this.targetPosition = this.productionBuffer.getAddPosition();
+            } else {
+                this.step = this.max_steps;
             }
         } else {
             if (!this.productionBuffer.isFull()) {
                 this.add();
+                this.originPosition = this.targetPosition;
+                this.targetPosition = this.consumerBuffer.getPopPosition();
+            } else {
+                this.step = this.max_steps;
             }
         }
     }
 
-    syncLogic() {
+    asyncLogic() {
         if (this.data == false) {
             if (this.consumerBuffer.isEmpty()) {
                 // TODO
@@ -114,20 +124,10 @@ class Entity {
             fill(255);
         }
 
-        let targetPosition;
-        let originPosition;
-        if (this.target == this.consumerBuffer) {
-            targetPosition = this.target.getPopPosition();
-            originPosition = this.origin.getAddPosition();
-        } else {
-            targetPosition = this.target.getAddPosition();
-            originPosition = this.origin.getPopPosition();
-        }
-
-        let diff = p5.Vector.sub(targetPosition, originPosition);
+        let diff = p5.Vector.sub(this.targetPosition, this.originPosition);
         diff.div(this.max_steps);
         diff.mult(this.step);
-        ellipse(originPosition.x + diff.x, originPosition.y + diff.y, this.size, this.size);
+        ellipse(this.originPosition.x + diff.x, this.originPosition.y + diff.y, this.size, this.size);
         pop();
     }
 }
