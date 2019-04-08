@@ -51,22 +51,25 @@
         </p>
 
         <h2>Application</h2>
-        <div>
-            <label>
-                Nombre de buffers :
-                <input id="bufferQte" type="range" class="form-control-range">
-            </label>
-            <span id="bufferQteLabel"></span>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12 text-center">
+                <h4 for="bufferQte">
+                    Nombre de buffers
+                </h4>
+                <input id="bufferQte" type="range" class="custom-range">
+                <span id="bufferQteLabel" style="font-size: 40;"></span>
+            </div>
+            <div class="col-md-6 col-sm-12 text-center">
+                  <h4 for="bufferSize">
+                  Taille d'un buffer
+                  </h4>
+                  <input id="bufferSize" type="range" class="custom-range">
+                  <span id="bufferSizeLabel" style="font-size: 40;"></span>
+            </div>
         </div>
-        <div>
-            <label>
-                Taille d'un buffer :
-                <input id="bufferSize" type="range" class="form-control-range">
-            </label>
-            <span id="bufferSizeLabel"></span>
-        </div>
-
-        <label>Vitesse des entités</label>
+        <hr>
+        <h3>Vitesse des entités</h3>
         <table id="table_entities" class="table w-100 text-center"></table>
 
         <div class="w-100 text-center p-2">
@@ -81,8 +84,8 @@
         <h2>Consumed Entities</h2>
 
         <!-- OVERFLOW WITH SCROLL-BAR -->
-        <!--<div class="d-flex flex-wrap" id="entitiesConsumed" style="overflow: auto; height: 210px">-->
-        <div class="d-flex flex-wrap" id="entitiesConsumed">
+        <div class="d-flex flex-wrap" id="entitiesConsumed" style="overflow: auto; height: 210px">
+        <!--<div class="d-flex flex-wrap" id="entitiesConsumed">-->
 
         </div>
 

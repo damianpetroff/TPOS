@@ -10,6 +10,7 @@ class EdgeBuffer {
         i.className = "p-2";
         i.style.cssText = "background-color: "+color+"; width: 41px; height: 41px; border: 1px solid black; border-radius: 50%;";
         log.appendChild(i);
+        log.scrollTop = log.scrollHeight;
     }
 
     pick() {
