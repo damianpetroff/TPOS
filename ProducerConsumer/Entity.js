@@ -69,7 +69,7 @@ class Entity {
                 this.originPosition = this.targetPosition;
                 this.targetPosition = this.productionBuffer.getAddPosition();
             } else {
-                this.step = this.max_steps;
+                this.step = this.max_steps; // to make it wait at near the target
             }
         } else {
             if (!this.productionBuffer.isFull()) {
@@ -77,19 +77,23 @@ class Entity {
                 this.originPosition = this.targetPosition;
                 this.targetPosition = this.consumerBuffer.getPopPosition();
             } else {
-                this.step = this.max_steps;
+                this.step = this.max_steps; // to make it wait at near the target
             }
         }
     }
 
     asyncLogic() {
         if (this.data == false) {
-            if (this.consumerBuffer.isEmpty()) {
+            if (!this.consumerBuffer.isEmpty()) {
+                this.pick();
+                this.originPosition = this.targetPosition;
+                this.targetPosition = this.productionBuffer.getAddPosition();
+            } else {
+                noLoop();
+                console.log("error");
                 // TODO
                 // console.log("error");
                 // noLoop();
-            } else {
-                this.pick();
             }
         } else {
             let hasOverride = this.add();
