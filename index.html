@@ -18,6 +18,7 @@
 	<script src="ProducerConsumer/Buffer.js"></script>
 	<script src="ProducerConsumer/Entity.js"></script>
 	<script src="ProducerConsumer/EdgeBuffer.js"></script>
+	<script src="ProducerConsumer/LogHistory.js"></script>
 
 	<!-- CUSTOM CSS -->
 	<link rel="stylesheet" href="./style.css">
@@ -66,9 +67,9 @@
 				<span id="bufferSizeLabel" style="font-size: 40;"></span>
 			</div>
 			<div class="col-md-6 col-sm-12 text-center">
-				<h4 for="bufferQte">Nombre de buffers</h4>
-				<input id="bufferQte" type="range" class="custom-range sync-only">
-				<span id="bufferQteLabel" style="font-size: 40;"></span>
+				<h4 for="bufferQte" class="sync-only-faded">Nombre de buffers</h4>
+				<input id="bufferQte" type="range" class="custom-range sync-only-disabled">
+				<span id="bufferQteLabel" class="sync-only-faded" style="font-size: 40;"></span>
 			</div>
 		</div>
 		<hr>
@@ -85,7 +86,7 @@
 
 		<h2 class="pt-3">Log history</h2>
 
-		<div class="d-flex flex-wrap" id="logHistory">
+		<div id="logHistoryDiv" class="d-flex flex-wrap">
 		</div>
 
 		<hr>

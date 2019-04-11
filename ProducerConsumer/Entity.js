@@ -87,22 +87,21 @@ class Entity {
 
 	asyncLogic() {
 		if (this.data == false) {
+			this.originPosition = this.targetPosition;
+			this.targetPosition = this.productionBuffer.getAddPosition();
 			if (!this.consumerBuffer.isEmpty()) {
 				this.pick();
-				this.originPosition = this.targetPosition;
-				this.targetPosition = this.productionBuffer.getAddPosition();
 			} else {
 				noLoop();
 				console.log("error");
-				// TODO
-				// console.log("error");
-				// noLoop();
 			}
 		} else {
-			let hasOverride = this.add();
-			if (hasOverride) {
-				// TODO
-			}
+			this.add();
+			this.originPosition = this.targetPosition;
+			this.targetPosition = this.consumerBuffer.getPopPosition();
+            if (this.productionBuffer.isFull()) {
+                console.log("override");
+            }
 		}
 	}
 

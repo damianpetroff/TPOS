@@ -1,10 +1,11 @@
 let pause;
 
-let logHistory = document.getElementById("logHistory");
+let logHistoryDiv = document.getElementById("logHistoryDiv");
 
 let lastModified = document.getElementById("lastModified");
 
-let syncOnlySettings = document.getElementsByClassName("sync-only");
+let syncOnlyFaded = document.getElementsByClassName("sync-only-faded");
+let syncOnlyDisabled = document.getElementsByClassName("sync-only-disabled");
 
 let bufferSyncRange = document.getElementById("bufferSyncRange");
 let bufferSyncLabel = document.getElementById("bufferSyncLabel");
@@ -63,15 +64,13 @@ function updateLabels() {
 }
 
 function resetFromDOM() {
-	let entitiesLabels = entitesSpeedLogic();
 	if (!getSync()) {
 		bufferQte.value = 1;
 	}
-    console.log(getSync());
+	let entitiesLabels = entitesSpeedLogic();
 	reset(parseInt(bufferQte.value), parseInt(bufferSize.value), entitiesLabels, getSync());
-	logHistory.innerHTML = '';
 	updateLabels();
-    updateSync();
+	updateSync();
 }
 
 function updateLabel(range, label) {
@@ -142,17 +141,21 @@ function entitesSpeedLogic() {
 		trEntities.appendChild(tdEntities);
 
 		let tdSpeed = document.createElement("td");
-
 		let input = document.createElement("input");
 		input.id = i;
-		input.type = "number";
+		input.type = "range";
+		input.classList.add("custom-range");
 		input.min = MIN_SPEED_ENTITY;
 		input.max = MAX_SPEED_ENTITY;
 		input.value = DEFAULT_SPEED_ENTITY;
 		input.addEventListener("input", function(e) {
 			changeEntitySpeed(e.srcElement);
+			label.innerHTML = e.srcElement.value;
 		});
+		let label = document.createElement("label");
+		label.innerHTML = input.value;
 		tdSpeed.appendChild(input);
+		tdSpeed.appendChild(label);
 		trSpeed.appendChild(tdSpeed);
 	}
 	return tab;
@@ -177,18 +180,31 @@ function togglePause(b = undefined) {
 
 function updateSync() {
 	if (getSync()) {
-		bufferSyncLabel.classList.remove("text-muted");
-		bufferASyncLabel.classList.add("text-muted");
+		bufferSyncLabel.classList.remove("text-danger");
+		bufferASyncLabel.classList.remove("text-success");
+
+		bufferSyncLabel.classList.add("text-success");
+		bufferASyncLabel.classList.add("text-danger");
 	} else {
-		bufferASyncLabel.classList.remove("text-muted");
-		bufferSyncLabel.classList.add("text-muted");
+		bufferSyncLabel.classList.remove("text-success");
+		bufferASyncLabel.classList.remove("text-danger");
+
+		bufferSyncLabel.classList.add("text-danger");
+		bufferASyncLabel.classList.add("text-success");
 	}
-	for (let i = 0; i < syncOnlySettings.length; i++) {
-		let syncOnlySetting = syncOnlySettings[i];
+	for (let i = 0; i < syncOnlyDisabled.length; i++) {
+		let s = syncOnlyDisabled[i];
 		if (getSync())
-			syncOnlySetting.removeAttribute("disabled")
+			s.removeAttribute("disabled")
 		else
-			syncOnlySetting.setAttribute("disabled", "true")
+			s.setAttribute("disabled", "true")
+	}
+	for (let i = 0; i < syncOnlyFaded.length; i++) {
+		let s = syncOnlyFaded[i];
+		if (getSync())
+			s.classList.remove("text-muted");
+		else
+			s.classList.add("text-muted");
 	}
 }
 
