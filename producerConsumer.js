@@ -14,8 +14,8 @@ function setup() {
 
 }
 
-function reset(nbBuffers, bufferSize, entitiesLabels) {
-    producerConsumer = new ProducerConsumer(nbBuffers, bufferSize, entitiesLabels);
+function reset(nbBuffers, bufferSize, entitiesLabels, sync) {
+    producerConsumer = new ProducerConsumer(nbBuffers, bufferSize, entitiesLabels, sync);
 }
 
 function widthChange() {

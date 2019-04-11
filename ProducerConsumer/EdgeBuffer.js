@@ -5,7 +5,7 @@ class EdgeBuffer {
 
     add(color) {
         // do nothing
-        let log = document.getElementById("entitiesConsumed");
+        let log = document.getElementById("logHistory");
         let i = document.createElement("div");
         i.className = "p-2";
         i.style.cssText = "background-color: "+color+"; width: 41px; height: 41px; border: 1px solid black; border-radius: 50%;";
