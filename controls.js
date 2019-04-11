@@ -1,6 +1,7 @@
 let pause;
 
 let logHistoryDiv = document.getElementById("logHistoryDiv");
+let clearLogHistory = document.getElementById("clearLogHistory");
 
 let lastModified = document.getElementById("lastModified");
 
@@ -46,12 +47,17 @@ window.addEventListener('load', function() {
 	});
 
 	bufferSyncRange.addEventListener("input", resetFromDOM);
-	bufferSyncRange.addEventListener("input", resetFromDOM);
 	btnRestart.addEventListener("click", resetFromDOM);
 
 	btnPause.addEventListener("click", function() {
 		togglePause();
 	});
+
+	clearLogHistory.addEventListener("click", function() {
+		logHistory.clear();
+	});
+
+
 
 	resetFromDOM();
 	togglePause(false);

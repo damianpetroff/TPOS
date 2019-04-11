@@ -13,7 +13,13 @@ html, body {
 	border: 1px solid black;
 }
 
-#entitiesConsumed {
-	overflow: auto;
+#logHistoryDiv{
+    overflow: auto;
 	height: 210px;
+    padding: 10px;
+    font-family: "Courier New";
+    width:100%;
+}
+#logHistoryDiv div {
+    padding-left: 15px;
 }

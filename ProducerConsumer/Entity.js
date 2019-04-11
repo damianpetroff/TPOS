@@ -8,6 +8,7 @@ class Entity {
 
 		this.step = 0;
 		this.max_steps = 100;
+        this.setSpeed(DEFAULT_SPEED_ENTITY);
 
 		this.size = min(WIDTH, HEIGHT) * 0.05;
 
@@ -93,14 +94,15 @@ class Entity {
 				this.pick();
 			} else {
 				noLoop();
-				console.log("error");
+                logHistory.pickEmpty();
 			}
 		} else {
+            let color = this.data;
 			this.add();
 			this.originPosition = this.targetPosition;
 			this.targetPosition = this.consumerBuffer.getPopPosition();
             if (this.productionBuffer.isFull()) {
-                console.log("override");
+                logHistory.override(color);
             }
 		}
 	}

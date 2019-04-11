@@ -17,6 +17,7 @@ function setup() {
 function reset(nbBuffers, bufferSize, entitiesLabels, sync) {
 	logHistory = new LogHistory(logHistoryDiv);
 	producerConsumer = new ProducerConsumer(nbBuffers, bufferSize, entitiesLabels, sync);
+    loop();
 }
 
 function widthChange() {

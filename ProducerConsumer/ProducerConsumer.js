@@ -30,6 +30,8 @@ class ProducerConsumer {
 			let producerBuffer = this.buffers[i + 1];
 			this.entities.push(new Entity(i, consumerBuffer, producerBuffer, entitiesLabels[i], sync));
 		}
+
+		logHistory.simulationStart(nbBuffers, bufferSize, sync);
 	}
 
 	update() {
