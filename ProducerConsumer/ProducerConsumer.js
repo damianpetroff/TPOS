@@ -51,6 +51,7 @@ class ProducerConsumer {
 	}
 
 	draw() {
+    	background(42);
 		for (let i = 0; i < this.buffers.length; i++) {
 			let buffer = this.buffers[i]
 			buffer.draw();

@@ -27,7 +27,6 @@ function widthChange() {
 }
 
 function draw() {
-	background(42);
 	if (producerConsumer) {
 		producerConsumer.update();
 		producerConsumer.draw();
