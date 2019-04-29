@@ -43,7 +43,7 @@ class LogHistory {
 
 	add(d) {
 		let today = new Date();
-		let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		let time = pad(today.getHours(), 2) + ":" + pad(today.getMinutes(), 2) + ":" + pad(today.getSeconds(), 2);
 
 		let line = document.createElement("div");
 		line.innerHTML += time + " : ";
@@ -55,4 +55,11 @@ class LogHistory {
 	clear() {
 		this.div.innerHTML = "";
 	}
+}
+
+//https://stackoverflow.com/a/10073788/9263555
+function pad(n, width, z) {
+	z = z || '0';
+	n = n + '';
+	return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }

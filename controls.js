@@ -57,8 +57,6 @@ window.addEventListener('load', function() {
 		logHistory.clear();
 	});
 
-
-
 	resetFromDOM();
 	togglePause(false);
 
@@ -75,6 +73,7 @@ function resetFromDOM() {
 	}
 	let entitiesLabels = entitesSpeedLogic();
 	reset(parseInt(bufferQte.value), parseInt(bufferSize.value), entitiesLabels, getSync());
+	togglePause(false);
 	updateLabels();
 	updateSync();
 }
@@ -123,11 +122,11 @@ function entitesSpeedLogic() {
 	table_entities.appendChild(trSpeed);
 
 	let thEntities = document.createElement("th");
-	thEntities.innerHTML = "Entité";
+	thEntities.innerHTML = "Entity";
 	trEntities.appendChild(thEntities);
 
 	let thSpeed = document.createElement("th");
-	thSpeed.innerHTML = "Vitesse";
+	thSpeed.innerHTML = "Speed";
 	trSpeed.appendChild(thSpeed);
 
 	let tab = [];

@@ -8,7 +8,7 @@ class Entity {
 
 		this.step = 0;
 		this.max_steps = 100;
-        this.setSpeed(DEFAULT_SPEED_ENTITY);
+		this.setSpeed(DEFAULT_SPEED_ENTITY);
 
 		this.size = min(WIDTH, HEIGHT) * 0.05;
 
@@ -94,16 +94,16 @@ class Entity {
 				this.pick();
 			} else {
 				noLoop();
-                logHistory.pickEmpty();
+				logHistory.pickEmpty();
 			}
 		} else {
-            let color = this.data;
+			let color = this.data;
 			this.add();
 			this.originPosition = this.targetPosition;
 			this.targetPosition = this.consumerBuffer.getPopPosition();
-            if (this.productionBuffer.isFull()) {
-                logHistory.override(color);
-            }
+			if (this.productionBuffer.isFull()) {
+				logHistory.override(color);
+			}
 		}
 	}
 
@@ -129,9 +129,10 @@ class Entity {
 		if (this.data) {
 			fill(this.data);
 		} else {
-			fill(255);
+			noFill();
 		}
-
+		strokeWeight(2);
+		stroke(240);
 		let diff = p5.Vector.sub(this.targetPosition, this.originPosition);
 		diff.div(this.max_steps);
 		diff.mult(this.step);
