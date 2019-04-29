@@ -31,7 +31,7 @@
 				<a href="http://he-arc.ch"><img src="external/resources/img/logo_hearc_ingenierie_rouge_transp.png" alt="logo_hearc_ingenierie" width="150px" /></a> 3253.1 Conception OS
 			</h3>
 			<p class="lead">
-				Authors : Quentin Michel, Raphaël Margueron & Damian Petroff -
+				Authors : Raphaël Margueron, Quentin Michel & Damian Petroff -
 				<span class="badge badge-danger">INF3dlm-b</span>
 				<div>
 					Last update :
@@ -43,26 +43,27 @@
 		<h2><img src="external/resources/img/flag_fr.png" alt="flag_fr" width="20" /> Introduction</h2>
 		<!--icon source : https://www.flaticon.com/ -->
 		<p>
-			Ce application web vise à fournir une représentation graphique du patterne <a href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs">Producteur-Consommateur</a>.
+			Cette application web vise à fournir une représentation graphique du patterne <a href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_des_producteurs_et_des_consommateurs">Producteur-Consommateur</a>.
 		</p>
 		<p>
-			De Wikipédia : Le problème des producteurs et des consommateurs est un exemple informatique de synchronisation de ressources, qui peut s'envisager dans différents contextes de programmation concurrente, notamment en environnement multi-thread. Il s'agit de partager entre deux tâches, le producteur et le consommateur, une zone de mémoire tampon utilisée comme une file. Le producteur génère un élément de données, l'enfile sur la file et recommence ; simultanément, le consommateur retire les données de file1.
+			De Wikipédia : Le problème des producteurs et des consommateurs est un exemple informatique de synchronisation de ressources, qui peut s'envisager dans différents contextes de programmation concurrente, notamment en environnement multi-thread. Il s'agit de partager entre deux tâches, le producteur et le consommateur, une zone de mémoire tampon utilisée comme une file. Le producteur génère un élément de données, l'enfile sur la file et recommence ; simultanément, le consommateur retire les données de file.
 			
 			Ce problème peut être généralisé à plusieurs producteurs ou consommateurs. 
 		</p>
+		<br>
 		<h2><img src="external/resources/img/flag_en.png" alt="flag_en" width="20" /> Introduction</h2>
 		<!--icon source : https://www.flaticon.com/ -->
 		<p>
 			This web application aims to provide a graphical representation of the <a href="https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem">Producer–consumer</a>.
 		</p>
 		<p>
-			In computing, the producer–consumer problem (also known as the bounded-buffer problem) is a classic example of a multi-process synchronization problem. The problem describes two processes, the producer and the consumer, who share a common, fixed-size buffer used as a queue. The producer's job is to generate data, put it into the buffer, and start again. At the same time, the consumer is consuming the data (i.e., removing it from the buffer), one piece at a time. The problem is to make sure that the producer won't try to add data into the buffer if it's full and that the consumer won't try to remove data from an empty buffer.
+			From Wikipedia : In computing, the producer–consumer problem (also known as the bounded-buffer problem) is a classic example of a multi-process synchronization problem. The problem describes two processes, the producer and the consumer, who share a common, fixed-size buffer used as a queue. The producer's job is to generate data, put it into the buffer, and start again. At the same time, the consumer is consuming the data (i.e., removing it from the buffer), one piece at a time. The problem is to make sure that the producer won't try to add data into the buffer if it's full and that the consumer won't try to remove data from an empty buffer.
 
 			The solution for the producer is to either go to sleep or discard data if the buffer is full. The next time the consumer removes an item from the buffer, it notifies the producer, who starts to fill the buffer again. In the same way, the consumer can go to sleep if it finds the buffer empty. The next time the producer puts data into the buffer, it wakes up the sleeping consumer. The solution can be reached by means of inter-process communication, typically using semaphores. An inadequate solution could result in a deadlock where both processes are waiting to be awakened. The problem can also be generalized to have multiple producers and consumers. 
 		</p>
 
-		<h2>Application</h2>
 		<hr>
+		<h2>Application</h2>
 		<div class="row">
 			<h4 id="bufferSyncLabel" class="col-md-5 col-sm-12 text-right">Synchrone</h4>
 			<div class="col-md-2 col-sm-12 text-center">
@@ -84,6 +85,7 @@
 		</div>
 		<hr>
 		<h3>Entity speed</h3>
+		<br>
 		<table id="table_entities" class="table w-100 text-center"></table>
 
 		<div class="w-100 text-center p-2">
